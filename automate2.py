@@ -31,7 +31,7 @@ campagne = 3
 ville = 90
 route = 0
 montagne = 2
-
+salut
 
 class Grille:
     # Geographie c'est une grille de valeur discretes décrivant l'environnement
