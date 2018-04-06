@@ -32,6 +32,7 @@ ville = 90
 route = 0
 montagne = 2
 
+
 class Grille:
     # Geographie c'est une grille de valeur discretes décrivant l'environnement
     # 3 -> campagne
@@ -58,6 +59,8 @@ class Grille:
                 elif(geographie[i][j] == montagne):
                     attractivite = 0.1
                     proba_mvt = 0.05
+
+                    # On ajoute une part d'aléoatoire dans la répartition de la population
 
                 sous_liste.append(
                     Cellule(int(population_totale * geographie[i][j] / total_geo * random.uniform(0.98, 1.02)), proba_mvt, attractivite))
