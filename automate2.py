@@ -49,16 +49,16 @@ class Grille:
             for j in range(taille):
                 if(geographie[i][j] == campagne):
                     attractivite = 0.1
-                    proba_mvt = 0.2
+                    proba_mvt = 0.001
                 elif(geographie[i][j] == ville):
                     attractivite = 0.3
-                    proba_mvt = 0.3
+                    proba_mvt = 0.01
                 elif(geographie[i][j] == route):
                     attractivite = 0.6
-                    proba_mvt = 0.95
+                    proba_mvt = 1
                 elif(geographie[i][j] == montagne):
                     attractivite = 0.1
-                    proba_mvt = 0.05
+                    proba_mvt = 0.002
 
                     # On ajoute une part d'aléatoire dans la répartition de la population
 
@@ -67,14 +67,24 @@ class Grille:
 
             self.cellules.append(sous_liste)
 
-def grille_pop(g) :
-    L=[]
+    def next(self):
+        nouvelle_cellules = []
+        # On commence par calculer les mouvements de population
+
+        for ligne in self.cellules:
+            sous_liste = []
+            for element in ligne:
+
+
+def grille_pop(g):
+    L = []
     for i in range(len(g.cellules)):
-        D=[]
+        D = []
         for j in range(len(g.cellules[0])):
             D.append(g.cellules[i][j].population)
         L.append(D)
     return L
+
 
 if __name__ == '__main__':
     GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
