@@ -68,12 +68,14 @@ class Grille:
             self.cellules.append(sous_liste)
 
     def next(self):
-        nouvelle_cellules = []
+        nouvelle_cellules = [] = self.cellules.copy()
         # On commence par calculer les mouvements de population
 
-        for ligne in self.cellules:
-            sous_liste = []
-            for element in ligne:
+        for i in range(len(self.cellules)):
+            for j in range(len(self.cellules[i])):
+                population_partie = self.cellules[i][j].population * \
+                    self.cellules[i][j].proba_mvt
+                nouvelle_cellules -= population_partie
 
 
 def grille_pop(g):
