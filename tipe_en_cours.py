@@ -19,14 +19,17 @@ rayon_infection = 2
 
 
 def init_grid(size):
-    G = []
-    for i in range(size):
-        sG = []
-        for j in range(size):
-            sG.append(0)
-        G.append(sG)
-    G[size // 2][size // 2] = 1
-    return G
+   # G = []
+    #for i in range(size):
+     #   sG = []
+      #  for j in range(size):
+       #     sG.append(0)
+        #G.append(sG)
+    #G[size // 2][size // 2] = 1
+    #return G
+    GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
+    g = Grille(3, GEO, 10000000)
+    return g
 
 
 def cases_touchees(x, y, rayon, minx, maxx, miny, maxy):
@@ -90,9 +93,10 @@ def etat_suivant(grille):
 
 def compte(grille):
     compteur = [0, 0, 0, 0]
-    for i in grille:
-        for j in i:
-            compteur[j] += 1
+    for i in range(grille.taille):
+        for j in range(len(grille.cellules[i])):
+            for k in range(len(grille.cellules[i][j].repartition)):
+                compteur[k] += grille.cellules[i][j].repartition[k]
 
     return compteur
 
@@ -144,28 +148,19 @@ def init_im(taille):
     im = Image.new("RGB",(taille_image,taille_image), "white")
     return im
 
-def transition(tab,im):
-    for i in range(len(tab)):
-        for j in range(len(tab)):
-            if tab[i][j]==0:
-                for k in range(int(20//len(tab)**0.3)*i,int(20//len(tab)**0.3)*(i+1)):
-                    for l in range(int(20//len(tab)**0.3)*j,int(20//len(tab)**0.3)*(j+1)):
-                        im.putpixel((k,l),(255,255,255))
-            elif tab[i][j]==1:
-                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
-                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
-                        im.putpixel((k,l),(255,0,0))
-            elif tab[i][j]==2:
-                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
-                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
-                        im.putpixel((k,l),(0,0,0))
-            elif tab[i][j]==3:
-                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
-                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
-                        im.putpixel((k,l),(0,255,0))
+def transition_image_sains(Grille,im):
+    moyenne = Grille.population_totale//Grille.taille
+    coeff = 127/moyenne
+    for i in range(Grille.taille):
+        for j in range(Grille.taille):
+            intensite = int(g.cellules[i][j].repartition*coeff)
+            if intensite>255:
+                intensite=255
+            im.putpixel((i,j),(intensite,0))
+
     return im
 
-def simulation_image(taille):
+def simulation_image_sains(taille):
     im = init_im(taille)
     grille = init_grid(taille)
     etape = 0
@@ -173,21 +168,21 @@ def simulation_image(taille):
     plt.show
     gif=[]
     k=0
-    while compte(grille)[1] != 0:
+    while compte(grille)[0] != 0:
         k+=1
         grille = etat_suivant(grille)
-        im = transition(grille,im)
-        im.save(str(k)+'.png')
-        gif.append(str(k)+'.png')
+        im = transition_image_sains(grille,im)
+        im.save(str(k)+'_sains'+'.png')
+        gif.append(str(k)+'_sains'+'.png')
     im = transition(grille,im)
     plt.imshow(im)
     plt.show()
     return gif
     
 
-def create_gif(filenames, duration,name):
+def create_gif_sains(filenames, duration,name):
     images = []
     for filename in filenames:
         images.append(imageio.imread(filename))
-    output_file = name + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
+    output_file = name + 'sains' + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
     imageio.mimsave(output_file, images, duration=duration)
