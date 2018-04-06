@@ -1,6 +1,6 @@
 import random
 
-# Reprtition est [Sain, Malade, Mort, Gueri]
+# Repartition est [Sain, Malade, Mort, Gueri]
 # Population est malade + sain + gueri
 
 
