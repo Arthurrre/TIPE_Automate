@@ -64,9 +64,16 @@ class Grille:
 
             self.cellules.append(sous_liste)
 
+def grille_pop(g) :
+    L=[]
+    for i in range(len(g.cellules)):
+        D=[]
+        for j in range(len(g.cellules[0])):
+            D.append(g.cellules[i][j].population)
+        L.append(D)
+    return L
 
 if __name__ == '__main__':
     GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
     g = Grille(3, GEO, 10000000)
-    for l in g.cellules:
-        print([c.population for c in l])
+    print(grille_pop(g))
