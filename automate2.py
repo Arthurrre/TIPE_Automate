@@ -11,6 +11,13 @@ class Cellule:
         self.prob_mvt = prob_mvt
         self.coeff_attractivite = coeff_attractivite
 
+    def repartition(self):
+        repartition_pourcentage = []
+        for i in self.repartition:
+            repartition_pourcentage.append(i / sum(self.repartition))
+
+        return repartition_pourcentage
+
     # virus = [proba_infection, proba_mort, proba_soin]
     def changement_interne(self, virus):
         ancien_etat = self.repartition.copy()
@@ -109,6 +116,7 @@ class Grille:
             x, y = voisins[choix_proba(liste_probas)]
 
             nouvelle_cellules[x][y] += population_partie
+            # Répartir la population selon les malades, sains , etc...
 
 
 def grille_pop(g):
