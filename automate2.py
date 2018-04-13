@@ -33,6 +33,28 @@ route = 0
 montagne = 2
 
 
+def cases_touchees(x, y, rayon, minx, maxx, miny, maxy):
+    coords = []
+
+    for i in range(max(minx, x - rayon), min(maxx, x + rayon + 1)):
+        for j in range(max(miny, y - rayon), min(maxy, y + rayon + 1)):
+            if j == y and i == x:
+                continue
+            coords.append((i, j))
+
+    return coords
+
+
+def choix_proba(liste_proba):
+    r = random.random()
+    somme_cumulée = 0
+    for i in range(len(liste_proba)):
+        somme_cumulée += liste_proba[i]
+        if r >= somme_cumulée:
+            return i
+    return liste_proba[::-1]
+
+
 class Grille:
     # Geographie c'est une grille de valeur discretes décrivant l'environnement
     # 3 -> campagne
@@ -68,7 +90,7 @@ class Grille:
             self.cellules.append(sous_liste)
 
     def next(self):
-        nouvelle_cellules = [] = self.cellules.copy()
+        nouvelle_cellules = self.cellules.copy()
         # On commence par calculer les mouvements de population
 
         for i in range(len(self.cellules)):
@@ -76,6 +98,17 @@ class Grille:
                 population_partie = self.cellules[i][j].population * \
                     self.cellules[i][j].proba_mvt
                 nouvelle_cellules -= population_partie
+            # Choix de la case ou la population part
+            voisins = cases_touchees(i, j, 0, self.taille, 0, self.taille, 1)
+
+            liste_probas = [selfcellules[x]
+                            [y].coeff_attractivite for x, y in voisins]
+            for i in range(len(liste_probas)):
+                liste_probas[i] /= sum(liste_probas)
+
+            x, y = voisins[choix_proba(liste_probas)]
+
+            nouvelle_cellules[x][y] += population_partie
 
 
 def grille_pop(g):
