@@ -148,33 +148,28 @@ def init_im(taille):
     im = Image.new("RGB",(taille_image,taille_image), "white")
     return im
 
-def transition_image_sains(Grille,im):
-    moyenne = Grille.population_totale//Grille.taille
+def transition_image_sains(grille,im):
+    moyenne = grille.population_initiale//grille.taille
     coeff = 127/moyenne
-    for i in range(Grille.taille):
-        for j in range(Grille.taille):
-            intensite = int(g.cellules[i][j].repartition*coeff)
+    for i in range(grille.taille):
+        for j in range(grille.taille):
+            intensite = int(grille.cellules[i][j].repartition[0]*coeff)
             if intensite>255:
                 intensite=255
-            im.putpixel((i,j),(intensite,0))
+            im.putpixel((i,j),(intensite), 0)
 
     return im
 
-def simulation_image_sains(taille):
-    im = init_im(taille)
-    grille = init_grid(taille)
-    etape = 0
-    plt.imshow(im)
-    plt.show
+def simulation_image_sains(grille):
+    im = init_im(grille.taille)
     gif=[]
     k=0
     while compte(grille)[0] != 0:
         k+=1
-        grille = etat_suivant(grille)
+        grille.next()
         im = transition_image_sains(grille,im)
         im.save(str(k)+'_sains'+'.png')
         gif.append(str(k)+'_sains'+'.png')
-    im = transition(grille,im)
     plt.imshow(im)
     plt.show()
     return gif

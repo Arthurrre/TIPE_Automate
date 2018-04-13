@@ -52,7 +52,8 @@ def choix_proba(liste_proba):
         somme_cumulée += liste_proba[i]
         if r >= somme_cumulée:
             return i
-    return liste_proba[::-1]
+        
+    return 0
 
 
 class Grille:
@@ -64,6 +65,7 @@ class Grille:
 
     def __init__(self, taille, geographie, population_totale):
         self.taille = taille
+        self.population_initiale = population_totale
         total_geo = sum([item for sublist in geographie for item in sublist])
         self.cellules = []
         for i in range(taille):
@@ -96,20 +98,22 @@ class Grille:
         for i in range(len(self.cellules)):
             for j in range(len(self.cellules[i])):
                 population_partie = self.cellules[i][j].population * \
-                    self.cellules[i][j].proba_mvt
-                nouvelle_cellules -= population_partie
+                    self.cellules[i][j].prob_mvt
+                nouvelle_cellules[i][j].population -= population_partie
             # Choix de la case ou la population part
-            voisins = cases_touchees(i, j, 0, self.taille, 0, self.taille, 1)
+            voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
 
-            liste_probas = [selfcellules[x]
+            liste_probas = [self.cellules[x]
                             [y].coeff_attractivite for x, y in voisins]
+            
             for i in range(len(liste_probas)):
                 liste_probas[i] /= sum(liste_probas)
 
             x, y = voisins[choix_proba(liste_probas)]
 
-            nouvelle_cellules[x][y] += population_partie
+            nouvelle_cellules[x][y].population += population_partie
 
+        self.cellules = nouvelle_cellules
 
 def grille_pop(g):
     L = []
