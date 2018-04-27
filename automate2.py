@@ -59,7 +59,7 @@ def choix_proba(liste_proba):
         somme_cumulée += liste_proba[i]
         if r >= somme_cumulée:
             return i
-        
+
     return 0
 
 
@@ -112,20 +112,23 @@ class Grille:
 
             liste_probas = [self.cellules[x]
                             [y].coeff_attractivite for x, y in voisins]
-            
+
             for i in range(len(liste_probas)):
                 liste_probas[i] /= sum(liste_probas)
 
             x, y = voisins[choix_proba(liste_probas)]
 
-<<<<<<< HEAD
             nouvelle_cellules[x][y].population += population_partie
-=======
-            nouvelle_cellules[x][y] += population_partie
+            nouvelle_cellules[x][y].repartition[0] += int(
+                population_partie * self.cellules[i][j].repartition()[0])
+            nouvelle_cellules[x][y].repartition[1] += int(
+                population_partie * self.cellules[i][j].repartition()[1])
+            nouvelle_cellules[x][y].repartition[1] += int(
+                population_partie * self.cellules[i][j].repartition()[3])
             # Répartir la population selon les malades, sains , etc...
->>>>>>> d8047da8a3ee8530015de07e2d0501cad07826a4
 
         self.cellules = nouvelle_cellules
+
 
 def grille_pop(g):
     L = []
