@@ -100,7 +100,7 @@ class Grille:
 
     def next(self):
         nouvelle_cellules = self.cellules.copy()
-        # Opipn commence par calculer les mouvements de population
+        # On commence par calculer les mouvements de population
 
         for i in range(len(self.cellules)):
             for j in range(len(self.cellules[i])):
