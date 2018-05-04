@@ -107,24 +107,24 @@ class Grille:
                 population_partie = self.cellules[i][j].population * \
                     self.cellules[i][j].prob_mvt
                 nouvelle_cellules[i][j].population -= population_partie
-            # Choix de la case ou la population part
-            voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
+            # Choix de la case où la population part
+                voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
 
-            liste_probas = [self.cellules[x]
-                            [y].coeff_attractivite for x, y in voisins]
+                liste_probas = [self.cellules[x]
+                                [y].coeff_attractivite for x, y in voisins]
 
-            for i in range(len(liste_probas)):
-                liste_probas[i] /= sum(liste_probas)
+                for k in range(len(liste_probas)):
+                    liste_probas[k] /= sum(liste_probas)
 
-            x, y = voisins[choix_proba(liste_probas)]
+                x, y = voisins[choix_proba(liste_probas)]
 
-            nouvelle_cellules[x][y].population += population_partie
-            nouvelle_cellules[x][y].repartition[0] += int(
-                population_partie * self.cellules[i][j].repartition[0])
-            nouvelle_cellules[x][y].repartition[1] += int(
-                population_partie * self.cellules[i][j].repartition[1])
-            nouvelle_cellules[x][y].repartition[1] += int(
-                population_partie * self.cellules[i][j].repartition[3])
+                nouvelle_cellules[x][y].population += population_partie
+                nouvelle_cellules[x][y].repartition[0] += int(
+                    population_partie * self.cellules[i][j].repartition[0])
+                nouvelle_cellules[x][y].repartition[1] += int(
+                    population_partie * self.cellules[i][j].repartition[1])
+                nouvelle_cellules[x][y].repartition[1] += int(
+                    population_partie * self.cellules[i][j].repartition()[3])
             # Répartir la population selon les malades, sains , etc...
 
         self.cellules = nouvelle_cellules
