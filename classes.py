@@ -124,7 +124,7 @@ class Grille:
                 nouvelle_cellules[x][y].repartition[1] += int(
                     population_partie * self.cellules[i][j].repartition[1])
                 nouvelle_cellules[x][y].repartition[1] += int(
-                    population_partie * self.cellules[i][j].repartition()[3])
+                    population_partie * self.cellules[i][j].repartition[3])
             # Répartir la population selon les malades, sains , etc...
 
         self.cellules = nouvelle_cellules
