@@ -144,8 +144,7 @@ def statistiques(taille, echantillon):
 
 
 def init_im(taille):
-    taille_image = int((20//taille**0.3)*taille)
-    im = Image.new("RGB",(taille_image,taille_image), "white")
+    im = Image.new("RGB",(taille,taille), "white")
     return im
 
 def transition_image_sains(grille,im):
@@ -156,22 +155,21 @@ def transition_image_sains(grille,im):
             intensite = int(grille.cellules[i][j].repartition[0]*coeff)
             if intensite>255:
                 intensite=255
-            im.putpixel((i,j),(intensite), 0)
-
+            im.putpixel((i,j),(255,255-intensite,255))
     return im
 
-def simulation_image_sains(grille):
+def simulation_image_sains(grille,virus):
     im = init_im(grille.taille)
     gif=[]
     k=0
     while compte(grille)[0] != 0:
         k+=1
-        grille.next()
+        grille.next(virus)
         im = transition_image_sains(grille,im)
         im.save(str(k)+'_sains'+'.png')
         gif.append(str(k)+'_sains'+'.png')
-    plt.imshow(im)
-    plt.show()
+        if k>10000:
+            break
     return gif
     
 

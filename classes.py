@@ -98,7 +98,7 @@ class Grille:
 
             self.cellules.append(sous_liste)
 
-    def next(self):
+    def next(self,virus):
         nouvelle_cellules = self.cellules.copy()
         # On commence par calculer les mouvements de population
 
@@ -126,6 +126,7 @@ class Grille:
                 nouvelle_cellules[x][y].repartition[1] += int(
                     population_partie * self.cellules[i][j].repartition_pr()[3])
             # Répartir la population selon les malades, sains , etc...
+                nouvelle_cellules[i][j].changement_interne(virus)
 
         self.cellules = nouvelle_cellules
 
@@ -135,12 +136,13 @@ def grille_pop(g):
     for i in range(len(g.cellules)):
         D = []
         for j in range(len(g.cellules[0])):
-            D.append(g.cellules[i][j].population)
+            D.append(int(g.cellules[i][j].population))
         L.append(D)
     return L
 
 
 if __name__ == '__main__':
     GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
-    g = Grille(3, GEO, 10000000)
+    g = Grille(3, GEO, 100)
     print(grille_pop(g))
+    virus=[1,1,0.2]
