@@ -21,13 +21,11 @@ class Cellule:
     # virus = [proba_infection, proba_mort, proba_soin]
     def changement_interne(self, virus):
         ancien_etat = self.repartition.copy()
-        print(self.population,self.repartition[1])
         if self.population == 0:
             self.repartition[1] = 0
         else :
-            self.repartition[1] += int(ancien_etat[0] * virus[0] * self.repartition[1] / self.population)
-        self.repartition[0] = ancien_etat[0] + \
-            ancien_etat[1] - self.repartition[1]
+            self.repartition[1] += int(ancien_etat[0] * virus[0] * ancien_etat[1] / self.population)
+        self.repartition[0] = ancien_etat[0] + ancien_etat[1] - self.repartition[1]
 
     # On calcule les morts avant les gueris car, je cite "mourir c'est plus rapide que guerir"
 
@@ -106,30 +104,28 @@ class Grille:
 
         for i in range(len(self.cellules)):
             for j in range(len(self.cellules[i])):
-                population_partie = self.cellules[i][j].population * \
-                    self.cellules[i][j].prob_mvt
-                nouvelle_cellules[i][j].population -= population_partie
-            # Choix de la case où la population part
-                voisins = cases_touchees(
-                    i, j, 1, 0, self.taille, 0, self.taille)
+                nouvelle_cellules[i][j].changement_interne(virus)
+                population_partie = self.cellules[i][j].population * self.cellules[i][j].prob_mvt
+                
 
-                liste_probas = [self.cellules[x]
-                                [y].coeff_attractivite for x, y in voisins]
+                nouvelle_cellules[i][j].population -= population_partie
+                # Choix de la case où la population part
+                voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
+
+                liste_probas = [self.cellules[x][y].coeff_attractivite for x, y in voisins]
 
                 for k in range(len(liste_probas)):
                     liste_probas[k] /= sum(liste_probas)
 
                 x, y = voisins[choix_proba(liste_probas)]
-
                 nouvelle_cellules[x][y].population += population_partie
-                nouvelle_cellules[x][y].repartition[0] += int(
-                    population_partie * self.cellules[i][j].repartition_pr()[0])
-                nouvelle_cellules[x][y].repartition[1] += int(
-                    population_partie * self.cellules[i][j].repartition_pr()[1])
-                nouvelle_cellules[x][y].repartition[1] += int(
-                    population_partie * self.cellules[i][j].repartition_pr()[3])
-            # Répartir la population selon les malades, sains , etc...
-                nouvelle_cellules[i][j].changement_interne(virus)
+                nouvelle_cellules[x][y].repartition[0] += int(population_partie * self.cellules[i][j].repartition_pr()[0])
+                nouvelle_cellules[x][y].repartition[1] += int(population_partie * self.cellules[i][j].repartition_pr()[1])
+                nouvelle_cellules[x][y].repartition[1] += int(population_partie * self.cellules[i][j].repartition_pr()[3])
+                if nouvelle_cellules[x][y].repartition[1] < 0:
+                    print(nouvelle_cellules[x][y].repartition)
+                    print(self.cellules[i][j].repartition_pr())
+            
 
         self.cellules = nouvelle_cellules
 
@@ -144,9 +140,9 @@ def grille_pop(g):
     return L
 
 
-#if __name__ == '__main__':
-   # GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
-   # GEO2 = [[3 for i in range(100)] for j in range(100)]
-   # g = Grille(100, GEO2, 10000000)
-   # print(grille_pop(g))
-   # virus = [1, 1, 0.2]
+if __name__ == '__main__':
+    GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
+    GEO2 = [[3 for i in range(100)] for j in range(100)]
+    g = Grille(100, GEO2, 10000000)
+    print(grille_pop(g))
+    virus = [1, 1, 0.2]
