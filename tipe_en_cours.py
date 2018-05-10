@@ -171,8 +171,6 @@ def simulation_image_sains(grille, virus):
         k += 1
         grille.next(virus)
         im = transition_image_sains(grille, im)
-        if k == 15:
-            im.putpixel((50, 50), (127, 200, 3))
         im.save(str(k)+'_sains'+'.png')
         gif.append(str(k)+'_sains'+'.png')
         
@@ -193,7 +191,7 @@ def create_gif_sains(filenames, duration, name):
 if __name__ == '__main__':
     GEO2 = [[3 for i in range(100)] for j in range(100)]
 
-    g = Grille(100, GEO2, 100000)
+    g = classes.Grille(100, GEO2, 100000)
     g.cellules[50][50].repartition[1] += 300
-    
+
     virus = [0.9, 0.4, 0.2]
