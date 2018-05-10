@@ -113,7 +113,6 @@ class Grille:
     def next(self, virus):
         nouvelle_cellules = self.cellules.copy()
         # On commence par calculer les mouvements de population
-        print(self.cellules[0][0].repartition)
         for i in range(len(self.cellules)):
             for j in range(len(self.cellules[i])):
                 population_partie = self.cellules[i][j].population * self.cellules[i][j].prob_mvt
