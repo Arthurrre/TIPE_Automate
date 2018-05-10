@@ -148,11 +148,3 @@ def grille_pop(g):
             D.append(int(g.cellules[i][j].population))
         L.append(D)
     return L
-
-
-if __name__ == '__main__':
-    GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
-    GEO2 = [[3 for i in range(100)] for j in range(100)]
-    g = Grille(100, GEO2, 10000000)
-    print(grille_pop(g))
-    virus = [1, 1, 0.2]
