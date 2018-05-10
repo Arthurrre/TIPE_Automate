@@ -149,9 +149,7 @@ def init_im(taille):
     return im
 
 
-def transition_image_sains(grille, im):
-    moyenne = grille.population_initiale//grille.taille
-    coeff = 127/moyenne
+def transition_image_sains(grille, im, coeff):
     for i in range(grille.taille):
         for j in range(grille.taille):
             intensite = int(grille.cellules[i][j].repartition[0]*coeff)
@@ -167,15 +165,22 @@ def simulation_image_sains(grille, virus):
     im = init_im(grille.taille)
     gif = []
     k = 0
+    moyenne = grille.population_initiale//grille.taille**2
+    coeff = 127/moyenne 
+    print(moyenne,coeff)
     while compte(grille)[0] != 0:
         k += 1
+<<<<<<< HEAD
         grille.next(virus)
         im = transition_image_sains(grille, im)
         if k == 15:
             im.putpixel((50, 50), (255, 255, 0))
+=======
+        im = transition_image_sains(grille, im, coeff)
+>>>>>>> 48d32284316ac0c152a18dc70800be14589daf64
         im.save(str(k)+'_sains'+'.png')
         gif.append(str(k)+'_sains'+'.png')
-        
+        grille.next(virus)
         if k > 19:
             break
     return gif
@@ -192,7 +197,11 @@ def create_gif_sains(filenames, duration, name):
 if __name__ == '__main__':
     GEO2 = [[3 for i in range(100)] for j in range(100)]
 
+<<<<<<< HEAD
     g = Grille(100, GEO2, 100000)
+=======
+    g = Grille(100, GEO2, 10000000)
+>>>>>>> 48d32284316ac0c152a18dc70800be14589daf64
     g.cellules[50][50].repartition[1] += 300
 
     virus = [0.9, 0.4, 0.2]
