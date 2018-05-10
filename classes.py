@@ -69,7 +69,7 @@ def choix_proba(liste_proba):
     somme_cumulée = 0
     for i in range(len(liste_proba)):
         somme_cumulée += liste_proba[i]
-        if r >= somme_cumulée:
+        if r <= somme_cumulée:
             return i
 
     return 0
@@ -127,7 +127,7 @@ class Grille:
                 voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
 
                 liste_probas = [self.cellules[x][y].coeff_attractivite for x, y in voisins]
-
+                
                 for k in range(len(liste_probas)):
                     liste_probas[k] /= sum(liste_probas)
 
