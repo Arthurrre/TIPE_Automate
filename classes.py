@@ -33,23 +33,15 @@ class Cellule:
         if self.population == 0:
             self.repartition[1] = 0
         else :
-<<<<<<< HEAD
-            self.repartition[1] += (ancien_etat[0] *
-                                   virus[0] * self.repartition[1] / self.population)
-        self.repartition[0] = ancien_etat[0] + \
-            ancien_etat[1] - self.repartition[1]
-=======
-            self.repartition[1] += int(ancien_etat[0] * virus[0] * ancien_etat[1] / self.population)
-        self.repartition[0] = ancien_etat[0] + ancien_etat[1] - self.repartition[1]
->>>>>>> d116b173577508c28836276cee850ed9c5a71f8e
+            self.repartition[1] += (ancien_etat[0] * virus[0] * self.repartition[1] / self.population)
+        self.repartition[0] = ancien_etat[0] +  ancien_etat[1] - self.repartition[1]
 
         # On calcule les morts avant les gueris car, je cite "mourir c'est plus rapide que guerir"
 
-        self.repartition[2] += int(ancien_etat[1] * virus[1])
+        self.repartition[2] += int(self.repartition[1] * virus[1])
+        self.repartition[1] -= int(self.repartition[1] * virus[1])
         self.repartition[3] += int(self.repartition[1] * virus[2])
-        self.repartition[1] = sum(ancien_etat[1:]) - sum(self.repartition[2:3])
-        if self.repartition[1] != 0:
-            print(self.repartition)
+        self.repartition[1] -= int(self.repartition[1] * virus[2])
 
 
 
@@ -140,9 +132,9 @@ class Grille:
 
                 x, y = voisins[choix_proba(liste_probas)]
                 nouvelle_cellules[x][y].population += population_partie
-                nouvelle_cellules[x][y].repartition[0] += int(population_partie * self.cellules[i][j].repartition_pr()[0])
-                nouvelle_cellules[x][y].repartition[1] += int(population_partie * self.cellules[i][j].repartition_pr()[1])
-                nouvelle_cellules[x][y].repartition[1] += int(population_partie * self.cellules[i][j].repartition_pr()[3])
+                nouvelle_cellules[x][y].repartition[0] += int(population_partie * self.cellules[i][j].repartition_pr_vivant()[0])
+                nouvelle_cellules[x][y].repartition[1] += int(population_partie * self.cellules[i][j].repartition_pr_vivant()[1])
+                nouvelle_cellules[x][y].repartition[1] += int(population_partie * self.cellules[i][j].repartition_pr_vivant()[3])
                 nouvelle_cellules[i][j].changement_interne(virus)
 
         self.cellules = nouvelle_cellules
