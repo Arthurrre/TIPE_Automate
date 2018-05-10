@@ -21,9 +21,11 @@ class Cellule:
     # virus = [proba_infection, proba_mort, proba_soin]
     def changement_interne(self, virus):
         ancien_etat = self.repartition.copy()
-
-        self.repartition[1] += int(ancien_etat[0] *
-                                   virus[0] * self.repartition[1] / self.population)
+        print(self.population,self.repartition[1])
+        if self.population == 0:
+            self.repartition[1] = 0
+        else :
+            self.repartition[1] += int(ancien_etat[0] * virus[0] * self.repartition[1] / self.population)
         self.repartition[0] = ancien_etat[0] + \
             ancien_etat[1] - self.repartition[1]
 
@@ -142,9 +144,9 @@ def grille_pop(g):
     return L
 
 
-if __name__ == '__main__':
-    GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
-    GEO2 = [[3 for i in range(100)] for j in range(100)]
-    g = Grille(100, GEO2, 10000000)
-    print(grille_pop(g))
-    virus = [1, 1, 0.2]
+#if __name__ == '__main__':
+   # GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
+   # GEO2 = [[3 for i in range(100)] for j in range(100)]
+   # g = Grille(100, GEO2, 10000000)
+   # print(grille_pop(g))
+   # virus = [1, 1, 0.2]

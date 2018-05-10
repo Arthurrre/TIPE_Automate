@@ -12,7 +12,6 @@ import os
 
 ##
 
-import classes
 
 proba_infection = 0.2
 proba_mort = 0.25
@@ -194,9 +193,7 @@ def create_gif_sains(filenames, duration, name):
 if __name__ == '__main__':
     GEO2 = [[3 for i in range(100)] for j in range(100)]
 
-    g = classes.Grille(100, GEO2, 100000)
+    g = Grille(100, GEO2, 100000)
     g.cellules[50][50].repartition[1] += 300
     
     virus = [0.9, 0.4, 0.2]
-
-    create_gif_sains(simulation_image_sains(g, virus), 0.01, 'timothelepd')
