@@ -171,6 +171,8 @@ def simulation_image_sains(grille, virus):
         k += 1
         grille.next(virus)
         im = transition_image_sains(grille, im)
+        if k == 15:
+            im.putpixel((50, 50), (255, 255, 0))
         im.save(str(k)+'_sains'+'.png')
         gif.append(str(k)+'_sains'+'.png')
         
@@ -183,15 +185,14 @@ def create_gif_sains(filenames, duration, name):
     images = []
     for filename in filenames:
         images.append(imageio.imread(filename))
-    output_file = name + 'sains' + \
-        '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
+    output_file = name + 'sains' + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
     imageio.mimsave(output_file, images, duration=duration)
 
 
 if __name__ == '__main__':
     GEO2 = [[3 for i in range(100)] for j in range(100)]
 
-    g = classes.Grille(100, GEO2, 100000)
+    g = Grille(100, GEO2, 100000)
     g.cellules[50][50].repartition[1] += 300
 
     virus = [0.9, 0.4, 0.2]
