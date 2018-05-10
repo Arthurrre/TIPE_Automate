@@ -157,9 +157,41 @@ def transition_image_sains(grille, im, coeff):
                 intensite = 0
             if intensite > 255:
                 intensite = 255
-            im.putpixel((i, j), (0, intensite, 0))
+            im.putpixel((i, j), (intensite, intensite, intensite))
     return im
 
+def transition_image_malades(grille, im, coeff):
+    for i in range(grille.taille):
+        for j in range(grille.taille):
+            intensite = int(grille.cellules[i][j].repartition[1]*coeff)
+            if intensite < 0:
+                intensite = 0
+            if intensite > 255:
+                intensite = 255
+            im.putpixel((i, j), (intensite, 0, 0))
+    return im
+
+def transition_image_morts(grille, im, coeff):
+    for i in range(grille.taille):
+        for j in range(grille.taille):
+            intensite = int(grille.cellules[i][j].repartition[2]*coeff*0.01)
+            if intensite < 0:
+                intensite = 0
+            if intensite > 255:
+                intensite = 255
+            im.putpixel((i, j), (intensite, 0, intensite))
+    return im
+
+def transition_image_gueris(grille, im, coeff):
+    for i in range(grille.taille):
+        for j in range(grille.taille):
+            intensite = int(grille.cellules[i][j].repartition[3]*coeff)
+            if intensite < 0:
+                intensite = 0
+            if intensite > 255:
+                intensite = 255
+            im.putpixel((i, j), (0, intensite, 0))
+    return im
 
 def simulation_image_sains(grille, virus):
     im = init_im(grille.taille)
@@ -175,14 +207,81 @@ def simulation_image_sains(grille, virus):
         im.save(str(k)+'_sains'+'.png')
         gif.append(str(k)+'_sains'+'.png')
         grille.next(virus)
-        if k > 19:
+        if k > 999:
+            break
+        grille.next(virus)
+    return gif
+
+def simulation_image_malades(grille, virus):
+    im = init_im(grille.taille)
+    gif = []
+    k = 0
+    moyenne = grille.population_initiale//grille.taille**2
+    coeff = 127/moyenne 
+    print(moyenne,coeff)
+    while compte(grille)[1] != 0:
+        k += 1
+        
+        im = transition_image_malades(grille, im, coeff)
+        im.save(str(k)+'_malades'+'.png')
+        gif.append(str(k)+'_malades'+'.png')
+        grille.next(virus)
+        if k > 999:
+            break
+        grille.next(virus)
+    return gif
+
+def simulation_image_morts(grille, virus):
+    im = init_im(grille.taille)
+    gif = []
+    k = 0
+    moyenne = grille.population_initiale//grille.taille**2
+    coeff = 127/moyenne 
+    print(moyenne,coeff)
+    while compte(grille)[1] != 0:
+        k += 1
+        
+        im = transition_image_morts(grille, im, coeff)
+        im.save(str(k)+'_morts'+'.png')
+        gif.append(str(k)+'_morts'+'.png')
+        grille.next(virus)
+        if k > 999:
+            break
+        grille.next(virus)
+    return gif
+
+def simulation_image_gueris(grille, virus):
+    im = init_im(grille.taille)
+    gif = []
+    k = 0
+    moyenne = grille.population_initiale//grille.taille**2
+    coeff = 127/moyenne 
+    print(moyenne,coeff)
+    while compte(grille)[1] != 0:
+        k += 1
+        
+        im = transition_image_gueris(grille, im, coeff)
+        im.save(str(k)+'_gueris'+'.png')
+        gif.append(str(k)+'_gueris'+'.png')
+        grille.next(virus)
+        if k > 999:
             break
         grille.next(virus)
     return gif
 
 
-def create_gif_sains(filenames, duration, name):
+def create_gif(etat, grille, virus, duration, name):
     images = []
+    if etat == "sain":
+        filenames = simulation_image_sains(grille, virus)
+    elif etat == "malade":
+        filenames = simulation_image_malades(grille, virus)
+    elif etat == "mort":
+        filenames = simulation_image_morts(grille, virus)
+    elif etat == "gueri":
+        filenames = simulation_image_gueris(grille, virus)
+    else:
+        return("etat incorrect")
     for filename in filenames:
         images.append(imageio.imread(filename))
     output_file = name + 'sains' + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
