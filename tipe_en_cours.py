@@ -12,6 +12,8 @@ import os
 
 ##
 
+import classes
+
 proba_infection = 0.2
 proba_mort = 0.25
 proba_soin = 0.1
@@ -154,9 +156,11 @@ def transition_image_sains(grille, im):
     for i in range(grille.taille):
         for j in range(grille.taille):
             intensite = int(grille.cellules[i][j].repartition[0]*coeff)
+            if intensite < 0:
+                intensite = 0
             if intensite > 255:
                 intensite = 255
-            im.putpixel((i, j), (255, 255-intensite, 255))
+            im.putpixel((i, j), (0, intensite, 0))
     return im
 
 
@@ -168,9 +172,12 @@ def simulation_image_sains(grille, virus):
         k += 1
         grille.next(virus)
         im = transition_image_sains(grille, im)
+        if k == 15:
+            im.putpixel((50, 50), (127, 200, 3))
         im.save(str(k)+'_sains'+'.png')
         gif.append(str(k)+'_sains'+'.png')
-        if k > 10000:
+        
+        if k > 19:
             break
     return gif
 
@@ -182,3 +189,14 @@ def create_gif_sains(filenames, duration, name):
     output_file = name + 'sains' + \
         '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
     imageio.mimsave(output_file, images, duration=duration)
+
+
+if __name__ == '__main__':
+    GEO2 = [[3 for i in range(100)] for j in range(100)]
+
+    g = classes.Grille(100, GEO2, 100000)
+    g.cellules[50][50].repartition[1] += 300
+    
+    virus = [0.9, 0.4, 0.2]
+
+    create_gif_sains(simulation_image_sains(g, virus), 0.01, 'timothelepd')
