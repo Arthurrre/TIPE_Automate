@@ -91,14 +91,14 @@ class Grille:
                     attractivite = 0.1
                     proba_mvt = 0.002
 
-                    # On ajoute une part d'aléatoire dans la répartition de la population
+                # On ajoute une part d'aléatoire dans la répartition de la population
 
                 sous_liste.append(
                     Cellule(int(population_totale * geographie[i][j] / total_geo * random.uniform(0.98, 1.02)), proba_mvt, attractivite))
 
             self.cellules.append(sous_liste)
 
-    def next(self,virus):
+    def next(self, virus):
         nouvelle_cellules = self.cellules.copy()
         # On commence par calculer les mouvements de population
 
@@ -108,7 +108,8 @@ class Grille:
                     self.cellules[i][j].prob_mvt
                 nouvelle_cellules[i][j].population -= population_partie
             # Choix de la case où la population part
-                voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
+                voisins = cases_touchees(
+                    i, j, 1, 0, self.taille, 0, self.taille)
 
                 liste_probas = [self.cellules[x]
                                 [y].coeff_attractivite for x, y in voisins]
@@ -143,6 +144,6 @@ def grille_pop(g):
 
 if __name__ == '__main__':
     GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
-    g = Grille(3, GEO, 100)
+    g = Grille(3, GEO, 10000)
     print(grille_pop(g))
-    virus=[1,1,0.2]
+    virus = [1, 1, 0.2]

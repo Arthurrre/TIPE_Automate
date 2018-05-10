@@ -20,13 +20,13 @@ rayon_infection = 2
 
 def init_grid(size):
    # G = []
-    #for i in range(size):
+    # for i in range(size):
      #   sG = []
       #  for j in range(size):
        #     sG.append(0)
-        #G.append(sG)
+        # G.append(sG)
     #G[size // 2][size // 2] = 1
-    #return G
+    # return G
     GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
     g = Grille(3, GEO, 10000000)
     return g
@@ -144,38 +144,41 @@ def statistiques(taille, echantillon):
 
 
 def init_im(taille):
-    im = Image.new("RGB",(taille,taille), "white")
+    im = Image.new("RGB", (taille, taille), "white")
     return im
 
-def transition_image_sains(grille,im):
+
+def transition_image_sains(grille, im):
     moyenne = grille.population_initiale//grille.taille
     coeff = 127/moyenne
     for i in range(grille.taille):
         for j in range(grille.taille):
             intensite = int(grille.cellules[i][j].repartition[0]*coeff)
-            if intensite>255:
-                intensite=255
-            im.putpixel((i,j),(255,255-intensite,255))
+            if intensite > 255:
+                intensite = 255
+            im.putpixel((i, j), (255, 255-intensite, 255))
     return im
 
-def simulation_image_sains(grille,virus):
+
+def simulation_image_sains(grille, virus):
     im = init_im(grille.taille)
-    gif=[]
-    k=0
+    gif = []
+    k = 0
     while compte(grille)[0] != 0:
-        k+=1
+        k += 1
         grille.next(virus)
-        im = transition_image_sains(grille,im)
+        im = transition_image_sains(grille, im)
         im.save(str(k)+'_sains'+'.png')
         gif.append(str(k)+'_sains'+'.png')
-        if k>10000:
+        if k > 10000:
             break
     return gif
-    
 
-def create_gif_sains(filenames, duration,name):
+
+def create_gif_sains(filenames, duration, name):
     images = []
     for filename in filenames:
         images.append(imageio.imread(filename))
-    output_file = name + 'sains' + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
+    output_file = name + 'sains' + \
+        '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
     imageio.mimsave(output_file, images, duration=duration)
