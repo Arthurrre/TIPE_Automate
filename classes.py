@@ -33,8 +33,15 @@ class Cellule:
         if self.population == 0:
             self.repartition[1] = 0
         else :
+<<<<<<< HEAD
+            self.repartition[1] += (ancien_etat[0] *
+                                   virus[0] * self.repartition[1] / self.population)
+        self.repartition[0] = ancien_etat[0] + \
+            ancien_etat[1] - self.repartition[1]
+=======
             self.repartition[1] += int(ancien_etat[0] * virus[0] * ancien_etat[1] / self.population)
         self.repartition[0] = ancien_etat[0] + ancien_etat[1] - self.repartition[1]
+>>>>>>> d116b173577508c28836276cee850ed9c5a71f8e
 
         # On calcule les morts avant les gueris car, je cite "mourir c'est plus rapide que guerir"
 
