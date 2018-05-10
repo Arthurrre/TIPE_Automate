@@ -21,15 +21,16 @@ class Cellule:
     def repartition_pr_vivant(self):
         repartition_pourcentage = []
         for i in self.repartition:
-            repartition_pourcentage.append(i / (self.repartition[0] + self.repartition[1] + self.repartition[3]))
+            if (self.repartition[0] + self.repartition[1] + self.repartition[3])==0:
+                repartition_pourcentage.append(0)
+            else :
+                repartition_pourcentage.append(i / (self.repartition[0] + self.repartition[1] + self.repartition[3]))
 
         return repartition_pourcentage
 
     # virus = [proba_infection, proba_mort, proba_soin]
     def changement_interne(self, virus):
         ancien_etat = self.repartition.copy()
-        if self.repartition[1] != 0:
-            print(self.repartition)
         if self.population == 0:
             self.repartition[1] = 0
         else :
@@ -112,7 +113,7 @@ class Grille:
     def next(self, virus):
         nouvelle_cellules = self.cellules.copy()
         # On commence par calculer les mouvements de population
-
+        print(self.cellules[0][0].repartition)
         for i in range(len(self.cellules)):
             for j in range(len(self.cellules[i])):
                 population_partie = self.cellules[i][j].population * self.cellules[i][j].prob_mvt
@@ -148,11 +149,3 @@ def grille_pop(g):
             D.append(int(g.cellules[i][j].population))
         L.append(D)
     return L
-
-
-if __name__ == '__main__':
-    GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
-    GEO2 = [[3 for i in range(100)] for j in range(100)]
-    g = Grille(100, GEO2, 10000000)
-    print(grille_pop(g))
-    virus = [1, 1, 0.2]
