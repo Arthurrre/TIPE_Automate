@@ -72,7 +72,7 @@ def choix_proba(liste_proba):
         if r <= somme_cumulée:
             return i
 
-    return 0
+    return random.choice(list(range(len(liste_proba))))
 
 
 class Grille:
