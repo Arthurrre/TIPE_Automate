@@ -221,7 +221,9 @@ def simulation_image_malades(grille, virus):
     print(moyenne,coeff)
     while compte(grille)[1] != 0:
         k += 1
-        
+        if sum(compte(grille)) > 10000000:
+            print(compte(grille))
+            print(k)
         im = transition_image_malades(grille, im, coeff)
         im.save(str(k)+'_malades'+'.png')
         gif.append(str(k)+'_malades'+'.png')
@@ -284,13 +286,27 @@ def create_gif(etat, grille, virus, duration, name):
         return("etat incorrect")
     for filename in filenames:
         images.append(imageio.imread(filename))
-    output_file = name + 'sains' + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
+    output_file = name + '-' + etat + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
     imageio.mimsave(output_file, images, duration=duration)
 
 
 if __name__ == '__main__':
-    GEO2 = [[3 for i in range(100)] for j in range(100)]
-    g = Grille(100, GEO2, 10000000)
-    g.cellules[50][50].repartition[1] += 300
+    GEO2 = [[3 for i in range(300)] for j in range(300)]
+    g = Grille(300, GEO2, 10000000)
+    g.cellules[150][150].repartition[1] += 30000
+    g.cellules[150][150].population += 30000
 
-    virus = [0.9, 0.4, 0.2]
+    virus = [0.6, 0.5, 0.3]
+##
+def malades (grille):
+    S=0
+    Ma=0
+    Mo=0
+    G=0
+    for i in range(grille.taille):
+        for j in range(grille.taille):
+            S+= grille.cellules[i][j].repartition[0]
+            Ma+= grille.cellules[i][j].repartition[1]
+            Mo+= grille.cellules[i][j].repartition[2]
+            G+= grille.cellules[i][j].repartition[3]
+    return (S,Ma,Mo,G,S+Ma+Mo+G)

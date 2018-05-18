@@ -43,6 +43,8 @@ class Cellule:
         self.repartition[1] -= int(self.repartition[1] * virus[1])
         self.repartition[3] += int(self.repartition[1] * virus[2])
         self.repartition[1] -= int(self.repartition[1] * virus[2])
+        
+        self.population = self.repartition[0] + self.repartition[1] + self.repartition[3]
 
 
 
@@ -91,17 +93,17 @@ class Grille:
             sous_liste = []
             for j in range(taille):
                 if(geographie[i][j] == campagne):
-                    attractivite = 0.1
-                    proba_mvt = 0.7
+                    attractivite = 0.2
+                    proba_mvt = 0.2
                 elif(geographie[i][j] == ville):
-                    attractivite = 0.3
-                    proba_mvt = 0.01
+                    attractivite = 0.5
+                    proba_mvt = 0.3
                 elif(geographie[i][j] == route):
-                    attractivite = 0.6
+                    attractivite = 0.7
                     proba_mvt = 1
                 elif(geographie[i][j] == montagne):
                     attractivite = 0.1
-                    proba_mvt = 0.002
+                    proba_mvt = 0.1
 
                 # On ajoute une part d'aléatoire dans la répartition de la population
 
@@ -126,9 +128,10 @@ class Grille:
                 voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
 
                 liste_probas = [self.cellules[x][y].coeff_attractivite for x, y in voisins]
+                nouvelle_liste_probas = []
                 
                 for k in range(len(liste_probas)):
-                    liste_probas[k] /= sum(liste_probas)
+                    nouvelle_liste_probas.append( liste_probas[k]/sum(liste_probas))
 
                 x, y = voisins[choix_proba(liste_probas)]
                 nouvelle_cellules[x][y].population += population_partie
