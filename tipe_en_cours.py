@@ -266,7 +266,7 @@ def simulation_image_gueris(grille, virus):
         im.save(str(k)+'_gueris'+'.png')
         gif.append(str(k)+'_gueris'+'.png')
         grille.next(virus)
-        if k > 999:
+        if k > 299:
             break
         grille.next(virus)
     return gif
