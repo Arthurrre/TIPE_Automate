@@ -114,16 +114,18 @@ class Grille:
 
     def next(self, virus):
         nouvelle_cellules = self.cellules.copy()
-        # On commence par calculer les mouvements de population
         for i in range(len(self.cellules)):
             for j in range(len(self.cellules[i])):
+                # Calcul de la population partie
                 population_partie = self.cellules[i][j].population * self.cellules[i][j].prob_mvt
-                
-
                 nouvelle_cellules[i][j].population -= population_partie
-                nouvelle_cellules[i][j].repartition[0] = int(nouvelle_cellules[i][j].population * self.cellules[i][j].repartition_pr_vivant()[0])
-                nouvelle_cellules[i][j].repartition[1] = int(nouvelle_cellules[i][j].population * self.cellules[i][j].repartition_pr_vivant()[1])
-                nouvelle_cellules[i][j].repartition[3] = int(nouvelle_cellules[i][j].population * self.cellules[i][j].repartition_pr_vivant()[3])
+
+                repartitions = self.cellules[i][j].repartition_pr_vivant()
+
+                # On répartit les pertes de population
+                nouvelle_cellules[i][j].repartition[0] = int(nouvelle_cellules[i][j].population * repartitions[0])
+                nouvelle_cellules[i][j].repartition[1] = int(nouvelle_cellules[i][j].population * repartitions[1])
+                nouvelle_cellules[i][j].repartition[3] = int(nouvelle_cellules[i][j].population * repartitions[3])
                 # Choix de la case où la population part
                 voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
 
@@ -131,11 +133,7 @@ class Grille:
                 nouvelle_liste_probas = []
                 
                 for k in range(len(liste_probas)):
-<<<<<<< HEAD
                     nouvelle_liste_probas.append( liste_probas[k]/sum(liste_probas))
-=======
-                    nouvelle_liste_probas.append(liste_probas[k] / sum(liste_probas))
->>>>>>> dacef5346613b9665064e5bb39e18def3a0ba560
 
                 x, y = voisins[choix_proba(nouvelle_liste_probas)]
                 nouvelle_cellules[x][y].population += population_partie
@@ -163,6 +161,6 @@ if __name__ == '__main__':
     g.cellules[50][50].repartition[1] += 300
     g.cellules[50][50].population += 300
 
-    virus = [0.9, 0.4, 0.2]
+    virus = [0.9, 0.1, 0.2]
 
     create_gif('malade', g, virus, 0.01, "test_liste_probas")
