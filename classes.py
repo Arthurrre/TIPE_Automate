@@ -126,11 +126,12 @@ class Grille:
                 voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
 
                 liste_probas = [self.cellules[x][y].coeff_attractivite for x, y in voisins]
+                nouvelle_liste_probas = []
                 
                 for k in range(len(liste_probas)):
-                    liste_probas[k] /= sum(liste_probas)
+                    nouvelle_liste_probas.append(liste_probas[k] / sum(liste_probas))
 
-                x, y = voisins[choix_proba(liste_probas)]
+                x, y = voisins[choix_proba(nouvelle_liste_probas)]
                 nouvelle_cellules[x][y].population += population_partie
                 nouvelle_cellules[x][y].repartition[0] += int(population_partie * self.cellules[i][j].repartition_pr_vivant()[0])
                 nouvelle_cellules[x][y].repartition[1] += int(population_partie * self.cellules[i][j].repartition_pr_vivant()[1])
@@ -148,3 +149,14 @@ def grille_pop(g):
             D.append(int(g.cellules[i][j].population))
         L.append(D)
     return L
+
+if __name__ == '__main__':
+    from tipe_en_cours import *
+    GEO2 = [[3 for i in range(100)] for j in range(100)]
+    g = Grille(100, GEO2, 10000000)
+    g.cellules[50][50].repartition[1] += 300
+    g.cellules[50][50].population += 300
+
+    virus = [0.9, 0.4, 0.2]
+
+    create_gif('malade', g, virus, 0.01, "test_liste_probas")
