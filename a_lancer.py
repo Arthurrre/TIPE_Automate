@@ -1,5 +1,4 @@
-from classes import *
-from tipe_en_cours import *
+
 
 GEO2 = [[3 for i in range(300)] for j in range(300)]
 
