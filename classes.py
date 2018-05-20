@@ -161,13 +161,4 @@ def grille_pop(g):
         L.append(D)
     return L
 
-if __name__ == '__main__':
-    from tipe_en_cours import *
-    GEO2 = [[3 for i in range(100)] for j in range(100)]
-    g = Grille(100, GEO2, 10000000)
-    g.cellules[50][50].repartition[1] += 300
-    g.cellules[50][50].population += 300
 
-    virus = [0.9, 0.1, 0.2]
-
-    create_gif('malade', g, virus, 0.01, "test_liste_probas")
