@@ -237,7 +237,7 @@ def simulation_image_sains(grille, virus):
         
         im = transition_image_sains(grille, im, coeff)
         im.save(str(k)+'_sains'+'.png')
-        gif.append(str(k)+'_sains'+'.png')
+        gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_sains'+'.png')
         grille.next(virus)
         if k > 999:
             break
@@ -257,7 +257,7 @@ def simulation_image_malades(grille, virus):
             print(k)
         im = transition_image_malades(grille, im, coeff)
         im.save(str(k)+'_malades'+'.png')
-        gif.append(str(k)+'_malades'+'.png')
+        gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_malades'+'.png')
         grille.next(virus)
         if k > 999:
             break
@@ -275,7 +275,7 @@ def simulation_image_morts(grille, virus):
         
         im = transition_image_morts(grille, im, coeff)
         im.save(str(k)+'_morts'+'.png')
-        gif.append(str(k)+'_morts'+'.png')
+        gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_morts'+'.png')
         grille.next(virus)
         if k > 999:
             break
@@ -293,7 +293,7 @@ def simulation_image_gueris(grille, virus):
         
         im = transition_image_gueris(grille, im, coeff)
         im.save(str(k)+'_gueris'+'.png')
-        gif.append(str(k)+'_gueris'+'.png')
+        gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_gueris'+'.png')
         grille.next(virus)
         if k > 299:
             break
@@ -314,20 +314,17 @@ def create_gif(etat, grille, virus, duration, name):
         return("etat incorrect")
     for filename in filenames:
         images.append(imageio.imread(filename))
-    output_file = name + '-' + etat + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
+    output_file = "D:\\autres\\Me\\Github\\pics\\"+ name + '-' + etat + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
     imageio.mimsave(output_file, images, duration=duration)
 
 
 if __name__ == '__main__':
-    from classes import *
     GEO2 = [[3 for i in range(300)] for j in range(300)]
     g = Grille(300, GEO2, 10000000)
     g.cellules[150][150].repartition[1] += 30000
     g.cellules[150][150].population += 30000
 
     virus = [0.6, 0.5, 0.3]
-
-    statistiques_2(g, virus)
 ##
 def malades (grille):
     S=0
