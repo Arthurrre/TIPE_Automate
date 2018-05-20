@@ -233,6 +233,7 @@ def simulation_image_sains(grille, virus):
     coeff = 127/moyenne 
     print(moyenne,coeff)
     while compte(grille)[0] != 0:
+        print(population(g)[0])
         k += 1
         
         im = transition_image_sains(grille, im, coeff)
@@ -251,6 +252,7 @@ def simulation_image_malades(grille, virus):
     coeff = 127/moyenne 
     print(moyenne,coeff)
     while compte(grille)[1] != 0:
+        print(population(g)[1])
         k += 1
         if sum(compte(grille)) > 10000000:
             print(compte(grille))
@@ -320,13 +322,13 @@ def create_gif(etat, grille, virus, duration, name):
 
 if __name__ == '__main__':
     GEO2 = [[3 for i in range(100)] for j in range(100)]
-    g = Grille(100, GEO2, 10000000)
+    g = Grille(100, GEO2, 1000000)
     g.cellules[50][50].repartition[1] += 300
     g.cellules[50][50].population += 300
 
-    virus = [0.6, 0.5, 0.3]
-##
-def malades (grille):
+    virus = [1, 0.1, 0.1]
+
+def population (grille):
     S=0
     Ma=0
     Mo=0
