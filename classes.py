@@ -96,8 +96,8 @@ class Grille:
                     attractivite = 0.2
                     proba_mvt = 0.2
                 elif(geographie[i][j] == ville):
-                    attractivite = 0.5
-                    proba_mvt = 0.3
+                    attractivite = 0.7
+                    proba_mvt = 0.1
                 elif(geographie[i][j] == route):
                     attractivite = 0.7
                     proba_mvt = 1
@@ -144,6 +144,13 @@ class Grille:
 
         self.cellules = nouvelle_cellules
 
+    def stats(self):
+        valeur_de_retour = [0, 0, 0, 0]
+        for ligne in self.cellules:
+            for cellule in ligne:
+                for i in range(4):
+                    valeur_de_retour[i] += cellule.repartition[i]
+        return valeur_de_retour
 
 def grille_pop(g):
     L = []

@@ -117,6 +117,38 @@ def simulation(taille):
     return etape, compte(grille)
 
 
+def statistiques_2(grille, virus):
+    k = 0
+    stats = []
+    while compte(grille)[1] != 0:
+        k += 1
+        print(k)
+        stats.append(grille.stats())
+        grille.next(virus)
+        if k > 999:
+            break
+    sains, infectes, morts, soignes = zip(*stats)
+    fig = plt.figure()
+    fig.suptitle('Évolution de la population en fonction du nombre d\'étapes', fontsize=14)
+
+    ax = fig.add_subplot(111)
+    fig.subplots_adjust(top=0.85)
+
+    ax.set_xlabel('Étapes')
+    ax.set_ylabel('Individus')
+
+    etapes = np.array(range(len(sains)))
+
+    sains_courbe = plt.plot(etapes, sains, label='Sains')
+    infectes_courbe = plt.plot(etapes, infectes, label='Infectés')
+    morts_courbe = plt.plot(etapes, morts, label='Morts')
+    soignes_courbe = plt.plot(etapes, soignes, label='Soignés')
+
+    plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
+
+    plt.show()
+
+
 def statistiques(taille, echantillon):
     etapes = []
     comptes = []
@@ -209,7 +241,6 @@ def simulation_image_sains(grille, virus):
         grille.next(virus)
         if k > 999:
             break
-        grille.next(virus)
     return gif
 
 def simulation_image_malades(grille, virus):
@@ -230,7 +261,6 @@ def simulation_image_malades(grille, virus):
         grille.next(virus)
         if k > 999:
             break
-        grille.next(virus)
     return gif
 
 def simulation_image_morts(grille, virus):
@@ -249,7 +279,6 @@ def simulation_image_morts(grille, virus):
         grille.next(virus)
         if k > 999:
             break
-        grille.next(virus)
     return gif
 
 def simulation_image_gueris(grille, virus):
@@ -268,7 +297,6 @@ def simulation_image_gueris(grille, virus):
         grille.next(virus)
         if k > 299:
             break
-        grille.next(virus)
     return gif
 
 
@@ -291,12 +319,15 @@ def create_gif(etat, grille, virus, duration, name):
 
 
 if __name__ == '__main__':
+    from classes import *
     GEO2 = [[3 for i in range(300)] for j in range(300)]
     g = Grille(300, GEO2, 10000000)
     g.cellules[150][150].repartition[1] += 30000
     g.cellules[150][150].population += 30000
 
     virus = [0.6, 0.5, 0.3]
+
+    statistiques_2(g, virus)
 ##
 def malades (grille):
     S=0
