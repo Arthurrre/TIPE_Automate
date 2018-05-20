@@ -32,7 +32,7 @@
 
         \HRule \\[0.4cm]
         { \huge \bfseries Simulation d'épidémies à l'aide d'automates cellulaires\\[0.4cm] }
-    
+    Un automate cellulaire est une matrice de cellules, chacune ayant un état, état appartenant à un ensemble prédéfini. L'état de chaque cellule peut varier au cours du temps suivant une fonction de transfert : l'état de la matrice à l'instant t+1 dépend ainsi de son état à l'instant t. L'automate doit donc posséder un état initial, c'est-à-dire la matrice des états initiaux des cellules.
         \HRule \\[2cm]
         \textsc{\Large Timothé Rios - Arthur Lacoin}\\[2cm]
 
@@ -40,18 +40,23 @@
 \end{sffamily}
 \end{titlepage}
 
+\tableofcontents
+
 \begin{abstract}
 
 Within the theme of transport, we have looked at how an epidemic spreads. To be able to represent this phenomenon, we chose to use a cellular automaton. A cellular automaton is a matrix of cells whose states vary over time. Here, at every moment, each cell can be Healthy, Sick, Deceased or Healed, according to its state as well as that of its neighbours at the moment before. Thus, with the information of an initial state, it is possible to materialize the spread of an epidemic. Of course, in order to accurately represent reality, it is necessary to make this model more complex by taking into account many factors that play a role in how a disease spreads.
 
 \end{abstract}
 
+\section{abstract}
+	L'étude de la propagation des maladies est une science qui remonte à 1854, quand John Snow, un médecin britannique, étudia la propagation de l'épidémie de choléra dans les quartiers de Londres. Ce sont là les prémices de l'épidémiologie, étude du transport des infections. De nos jours les méthodes ont évolué, et on utilise principalement la méthode différentielle, que l'on présentera plus loin. Nous nous sommes attardés, ici, à la simulation par automate cellulaire.
+
 \section{Première version}
 
 \subsection{Présentation}
 
 \subsubsection{Définition formelle}
-	Un automate cellulaire est une matrice de cellules, chacune ayant un état, état appartenant à un ensemble prédéfini. L'état de chaque cellule peut varier au cours du temps suivant une fonction de transfert : l'état de la matrice à l'instant t+1 dépend ainsi de son état à l'instant t. L'automate doit donc posséder un état initial, c'est-à-dire la matrice des états initiaux des cellules.
+	Un automate cellulaire est une matrice de cellules, chacune ayant un état, état appartenant à un ensemble prédéfini. L'état de chaque cellule peut varier au cours du temps suivant une fonction de transfert : l'état de la matrice à l'instant $t+1$ dépend ainsi de son état à l'instant $t$. L'automate doit donc posséder un état initial, c'est-à-dire la matrice des états initiaux des cellules.
 
 \subsubsection{Historique}
 	Les automates cellulaires sont plutôt récents. Ils ont été mis au point par John Von Neumann dans son étude des systèmes auto-réplicatifs dans les années 1940. Cette notion a été grandement popularisée par le "jeu de la vie" de John Conway, un automate cellulaire en 2 dimensions paru dans les années 1970. À ce jour, les automates cellulaires ont de nombreuses applications dans divers domaines :
