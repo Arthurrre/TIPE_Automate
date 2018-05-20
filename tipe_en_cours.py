@@ -236,8 +236,8 @@ def simulation_image_sains(grille, virus):
         k += 1
         
         im = transition_image_sains(grille, im, coeff)
-        im.save("D:\\autres\\Me\\Github\\pics\\"str(k)+'_sains'+'.png')
-        gif.append(+str(k)+'_sains'+'.png')
+        im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_sains'+'.png')
+        gif.append(str(k)+'_sains'+'.png')
         grille.next(virus)
         if k > 999:
             break
@@ -256,8 +256,8 @@ def simulation_image_malades(grille, virus):
             print(compte(grille))
             print(k)
         im = transition_image_malades(grille, im, coeff)
-        im.save("D:\\autres\\Me\\Github\\pics\\"str(k)+'_malades'+'.png')
-        gif.append(+str(k)+'_malades'+'.png')
+        im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_malades'+'.png')
+        gif.append(str(k)+'_malades'+'.png')
         grille.next(virus)
         if k > 999:
             break
@@ -274,8 +274,8 @@ def simulation_image_morts(grille, virus):
         k += 1
         
         im = transition_image_morts(grille, im, coeff)
-        im.save("D:\\autres\\Me\\Github\\pics\\"str(k)+'_morts'+'.png')
-        gif.append(+str(k)+'_morts'+'.png')
+        im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_morts'+'.png')
+        gif.append(str(k)+'_morts'+'.png')
         grille.next(virus)
         if k > 999:
             break
@@ -292,8 +292,8 @@ def simulation_image_gueris(grille, virus):
         k += 1
         
         im = transition_image_gueris(grille, im, coeff)
-        im.save("D:\\autres\\Me\\Github\\pics\\"str(k)+'_gueris'+'.png')
-        gif.append(+str(k)+'_gueris'+'.png')
+        im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_gueris'+'.png')
+        gif.append(str(k)+'_gueris'+'.png')
         grille.next(virus)
         if k > 299:
             break
