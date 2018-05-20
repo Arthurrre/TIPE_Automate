@@ -139,10 +139,10 @@ def statistiques_2(grille, virus):
 
     etapes = np.array(range(len(sains)))
 
-    sains_courbe = plt.plot(etapes, sains, label='Sains')
-    infectes_courbe = plt.plot(etapes, infectes, label='Infectés')
-    morts_courbe = plt.plot(etapes, morts, label='Morts')
-    soignes_courbe = plt.plot(etapes, soignes, label='Soignés')
+    sains_courbe, = plt.plot(etapes, sains, label='Sains')
+    infectes_courbe, = plt.plot(etapes, infectes, label='Infectés')
+    morts_courbe, = plt.plot(etapes, morts, label='Morts')
+    soignes_courbe, = plt.plot(etapes, soignes, label='Soignés')
 
     plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
 
