@@ -319,10 +319,10 @@ def create_gif(etat, grille, virus, duration, name):
 
 
 if __name__ == '__main__':
-    GEO2 = [[3 for i in range(300)] for j in range(300)]
-    g = Grille(300, GEO2, 10000000)
-    g.cellules[150][150].repartition[1] += 30000
-    g.cellules[150][150].population += 30000
+    GEO2 = [[3 for i in range(100)] for j in range(100)]
+    g = Grille(100, GEO2, 10000000)
+    g.cellules[50][50].repartition[1] += 300
+    g.cellules[50][50].population += 300
 
     virus = [0.6, 0.5, 0.3]
 ##
