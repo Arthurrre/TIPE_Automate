@@ -101,14 +101,19 @@ class Grille:
             sous_liste = []
             for j in range(taille):
                 if(geographie[i][j] == campagne):
-                    attractivite = 0.2
-                    proba_mvt = 0.2
+                    attractivite = 0.01
+                    proba_mvt = 0.01
                 elif(geographie[i][j] == ville):
-                    attractivite = 0.7
-                    proba_mvt = 0.1
+                    attractivite = 0.3
+                    proba_mvt = 0.5
                 elif(geographie[i][j] == route):
+<<<<<<< HEAD
                     attractivite = 0.7
                     proba_mvt = 0.7
+=======
+                    attractivite = 0.9
+                    proba_mvt = 1
+>>>>>>> 9472ede8ce95fbcf2c89be2c7c263bff34fd6bd0
                 elif(geographie[i][j] == montagne):
                     attractivite = 0.1
                     proba_mvt = 0.1

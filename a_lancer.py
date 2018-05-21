@@ -25,7 +25,7 @@ g2 = Grille(300, GEO2, 10000000)
 g2.cellules[150][150].repartition[1] += 30000
 g2.cellules[150][150].population += 30000
 
-virus = [0.6, 0.5, 0.3]
+virus = [0.7, 0.7, 0.7]
 
 statistiques_2(g2, virus)
 """
