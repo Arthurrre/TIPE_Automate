@@ -41,8 +41,9 @@ class Cellule:
             print("Pas très normal que ça s'affiche.")
             return
         else :
-            self.repartition[1] += int(ancien_etat[0] * virus[0])
-            self.repartition[0] = ancien_etat[0] +  ancien_etat[1] - self.repartition[1]
+            if self.repartition[1] != 0:
+                self.repartition[1] += int(ancien_etat[0] * virus[0])
+                self.repartition[0] = ancien_etat[0] +  ancien_etat[1] - self.repartition[1]
 
         # On calcule les morts avant les gueris car, je cite "mourir c'est plus rapide que guerir"
 
@@ -107,13 +108,8 @@ class Grille:
                     attractivite = 0.3
                     proba_mvt = 0.5
                 elif(geographie[i][j] == route):
-<<<<<<< HEAD
                     attractivite = 0.7
                     proba_mvt = 0.7
-=======
-                    attractivite = 0.9
-                    proba_mvt = 1
->>>>>>> 9472ede8ce95fbcf2c89be2c7c263bff34fd6bd0
                 elif(geographie[i][j] == montagne):
                     attractivite = 0.1
                     proba_mvt = 0.1
