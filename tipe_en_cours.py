@@ -125,7 +125,7 @@ def statistiques_2(grille, virus):
         print(k)
         stats.append(grille.stats())
         grille.next(virus)
-        if k > 999:
+        if k > 99:
             break
     sains, infectes, morts, soignes = zip(*stats)
     fig = plt.figure()

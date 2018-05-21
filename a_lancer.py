@@ -8,11 +8,10 @@ ville = cases_touchees(31, 45, 2, 0, 50, 0, 50)
 for i, j in ville:
     GEO2[i][j] = 90
 
-g = Grille(50, GEO2, 100000)
+g = Grille(50, GEO2, 10000000)
 g.cellules[25][25].repartition[1] += 300
-g.cellules[25][25].population += 300
 
-virus = [0.9, 0.05, 0.05]
+virus = [0.9, 0.2, 0.2]
 
 statistiques_2(g, virus)
 
@@ -23,7 +22,7 @@ for i, j in ville:
 
 g2 = Grille(300, GEO2, 10000000)
 g2.cellules[150][150].repartition[1] += 30000
-g2.cellules[150][150].population += 30000
+
 
 virus = [0.7, 0.7, 0.7]
 
