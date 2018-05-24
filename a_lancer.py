@@ -3,7 +3,7 @@ from tipe_en_cours import *
 
 GEO2 = [[3 for i in range(50)] for j in range(50)]
 
-ville = cases_touchees(31, 45, 2, 0, 50, 0, 50)
+ville = cases_touchees(25, 25, 2, 0, 50, 0, 50)
 
 for i, j in ville:
     GEO2[i][j] = 90
@@ -11,7 +11,7 @@ for i, j in ville:
 g = Grille(50, GEO2, 10000000)
 g.cellules[25][25].repartition[1] += 300
 
-virus = [0.9, 0.2, 0.2]
+virus = [0.8, 0.2, 0]
 
 statistiques_2(g, virus)
 

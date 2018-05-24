@@ -10,6 +10,7 @@ from scipy import ndimage
 import math
 import os
 
+from classes import *
 ##
 
 
@@ -122,19 +123,19 @@ def statistiques_2(grille, virus):
     stats = []
     while compte(grille)[1] != 0:
         k += 1
-        print(k)
+        print(grille_pop_sum(grille))
         stats.append(grille.stats())
         grille.next(virus)
         if k > 99:
             break
     sains, infectes, morts, soignes = zip(*stats)
     fig = plt.figure()
-    fig.suptitle('Évolution de la population en fonction du nombre d\'étapes', fontsize=14)
+    fig.suptitle('Evolution de la population en fonction du nombre d\'étapes', fontsize=14)
 
     ax = fig.add_subplot(111)
     fig.subplots_adjust(top=0.85)
 
-    ax.set_xlabel('Étapes')
+    ax.set_xlabel('Etapes')
     ax.set_ylabel('Individus')
 
     etapes = np.array(range(len(sains)))
@@ -262,7 +263,6 @@ def simulation_image_malades(grille, virus):
         im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_malades'+'.png')
         gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_malades'+'.png')
         grille.next(virus)
-        print(population(g)[1])
         if k > 9999:
             break
     return gif

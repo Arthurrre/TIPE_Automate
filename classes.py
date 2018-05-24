@@ -189,13 +189,3 @@ def grille_pop_sum(g):
             somme += g.cellules[i][j].population()
     
     return somme
-        
-"""
-if __name__ == '__main__':
-    c = Cellule(1000, 0, 0)
-    c.repartition[1] += 100
-    for i in range(30):
-        print(c.repartition)
-        print(c.population())
-        c.changement_interne([0.9, 0.5, 0.55])
-"""
