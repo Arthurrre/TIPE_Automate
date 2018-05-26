@@ -19,7 +19,7 @@ def init_grid(size):
 
 
 def cases_touchees(x, y, rayon, minx, maxx, miny, maxy):
-    coords = []
+    coords = []Mort
 
     for i in range(max(minx, x - rayon), min(maxx, x + rayon + 1)):
         for j in range(max(miny, y - rayon), min(maxy, y + rayon + 1)):
@@ -45,8 +45,7 @@ def contact(grille, i, j):
 
 def calcul_proba_infection(contacts, rayon, base_proba, i, j):
     max_contact = (1 + 2 * rayon)**2 - 1
-    voisins_ponderee = base_proba * \
-        math.log(1 + contacts) / math.log(1 + max_contact)
+    voisins_ponderee = base_proba * math.log(1 + contacts) / math.log(1 + max_contact)
     return densites[i][j] * voisins_ponderee
 
 

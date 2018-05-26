@@ -170,7 +170,7 @@ class Grille:
         return valeur_de_retour
 
 
-# Fonction utilisées pour débugger.
+# Fonctions utilisées pour débugger.
 
 def grille_pop(g):
     L = []
