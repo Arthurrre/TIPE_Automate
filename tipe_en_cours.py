@@ -19,7 +19,7 @@ proba_mort = 0.25
 proba_soin = 0.1
 rayon_infection = 2
 
-max_etape = 9999
+max_etape = 399
 
 
 def init_grid(size):
@@ -37,6 +37,27 @@ def compte(grille):
     return compteur
 
 
+def statistiques_finale(grille, virus, quantite):
+
+    # Ces variables sont des listes de listes, qui contiennent la variation de la population
+    # au cours du temps, pour chaque itération
+
+    sains = []
+    infectes = []
+    morts = []
+    soignes = []
+
+    for i in range(quantite):
+        nouvelle_grille = copy.deepcopy(grille)
+        sain, infecte, mort, soigne = statistiques_2(nouvelle_grille, virus)
+        sains.append(sain)
+        infectes.append(infecte)
+        morts.append(mort)
+        soignes.append(soigne)
+    
+    return sains, infectes, morts, soignes
+        
+
 def statistiques_2(grille, virus):
     k = 0
     stats = []
@@ -47,7 +68,12 @@ def statistiques_2(grille, virus):
         grille.next(virus)
         if k > max_etape:
             break
-    sains, infectes, morts, soignes = zip(*stats)
+    
+    return zip(*stats)
+
+
+
+    """
     fig = plt.figure()
     fig.suptitle('Evolution de la population en fonction du nombre d\'étapes', fontsize=14)
 
@@ -67,7 +93,7 @@ def statistiques_2(grille, virus):
     plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
 
     plt.show()
-
+"""
 def init_im(taille):
     im = Image.new("RGB", (taille, taille), "white")
     return im
@@ -154,7 +180,7 @@ def simulation_image_malades(grille, virus):
         im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_malades'+'.png')
         gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_malades'+'.png')
         grille.next(virus)
-        if k > 9999:
+        if k > max_etape:
             break
     return gif
 
