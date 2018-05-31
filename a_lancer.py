@@ -29,7 +29,7 @@ g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiau
 simulation_image_malades(g, virus)
 
 
-"""
+
 sains, malades, morts, soignes = statistiques_finale(g, virus, 10)
 
 nom_fichier = "1_ville_repartitions.pickle"
@@ -37,23 +37,45 @@ nom_fichier = "1_ville_repartitions.pickle"
 with open(nom_fichier, 'wb') as handle:
     pickle.dump([sains, malades, morts, soignes], handle, protocol=pickle.HIGHEST_PROTOCOL)
 
+# Deux villes
+
 ville = cases_touchees(13, 13, 2, 0, taille_grille, 0, taille_grille)
 
+for x, y in ville:
+    GEO2[x][y] = 90
+
+g = Grille(taille_grille, GEO2, population_initiale)
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
+
+
+simulation_image_malades(g, virus)
+
+
+
+sains, malades, morts, soignes = statistiques_finale(g, virus, 10)
+
+nom_fichier = "2_ville_repartitions.pickle"
+
+with open(nom_fichier, 'wb') as handle:
+    pickle.dump([sains, malades, morts, soignes], handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+# Trois villes
 
 ville = cases_touchees(14, 42, 2, 0, taille_grille, 0, taille_grille)
 
+for x, y in ville:
+    GEO2[x][y] = 90
+
+g = Grille(taille_grille, GEO2, population_initiale)
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
 
-
-ville = cases_touchees(150, 150, 1, 0, 300, 0, 300)
-for i, j in ville:
-    GEO2[i][j] = 90
-
-g2 = Grille(300, GEO2, 10000000)
-g2.cellules[150][150].repartition[1] += 30000
+simulation_image_malades(g, virus)
 
 
-virus = [0.7, 0.7, 0.7]
+sains, malades, morts, soignes = statistiques_finale(g, virus, 10)
 
-statistiques_2(g2, virus)
-"""
+nom_fichier = "3_ville_repartitions.pickle"
+
+with open(nom_fichier, 'wb') as handle:
+    pickle.dump([sains, malades, morts, soignes], handle, protocol=pickle.HIGHEST_PROTOCOL)

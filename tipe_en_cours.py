@@ -158,7 +158,7 @@ def simulation_image_sains(grille, virus):
         im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_sains'+'.png')
         gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_sains'+'.png')
         grille.next(virus)
-        if k > 9999:
+        if k > max_etape:
             break
         if compte(grille)[0] == 0:
             break
@@ -198,7 +198,7 @@ def simulation_image_morts(grille, virus):
         im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_morts'+'.png')
         gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_morts'+'.png')
         grille.next(virus)
-        if k > 9999:
+        if k > max_etape:
             break
     return gif
 
@@ -216,7 +216,7 @@ def simulation_image_gueris(grille, virus):
         im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_gueris'+'.png')
         gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_gueris'+'.png')
         grille.next(virus)
-        if k > 9999:
+        if k > max_etape:
             break
     return gif
 
@@ -238,15 +238,6 @@ def create_gif(etat, grille, virus, duration, name):
     output_file = "D:\\autres\\Me\\Github\\pics\\"+ name + '-' + etat + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
     imageio.mimsave(output_file, images, duration=duration)
 
-##
-if __name__ == '__main__':
-    GEO2 = [[3 for i in range(100)] for j in range(100)]
-    g = Grille(100, GEO2, 1000000)
-    g.cellules[50][50].repartition[1] += 300
-    g.cellules[50][50].population += 300
-
-    virus = [1, 0.1, 0.1]
-##
 def population (grille):
     S=0
     Ma=0
