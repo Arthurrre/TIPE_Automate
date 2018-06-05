@@ -1,5 +1,4 @@
-from classes import *
-from tipe_en_cours import *
+    
 
 import pickle
 

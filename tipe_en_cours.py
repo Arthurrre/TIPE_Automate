@@ -9,8 +9,6 @@ from PIL import ImageDraw
 from scipy import ndimage
 import math
 import os
-
-from classes import *
 ##
 
 
@@ -40,7 +38,7 @@ def compte(grille):
 def statistiques_finale(grille, virus, quantite):
 
     # Ces variables sont des listes de listes, qui contiennent la variation de la population
-    # au cours du temps, pour chaque itération
+    # au cours du temps, pour chaque itération
 
     sains = []
     infectes = []
@@ -155,8 +153,8 @@ def simulation_image_sains(grille, virus):
         k += 1
         
         im = transition_image_sains(grille, im, coeff)
-        im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_sains'+'.png')
-        gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_sains'+'.png')
+        im.save( str(k)+'_sains'+'.png')
+        gif.append( str(k)+'_sains'+'.png')
         grille.next(virus)
         if k > max_etape:
             break
@@ -173,12 +171,12 @@ def simulation_image_malades(grille, virus):
     print(moyenne,coeff)
     while compte(grille)[1] != 0:
         k += 1
-        if sum(compte(grille)) > 10000000:
+        if sum(compte(grille)) > grille.population_initiale:
             print(compte(grille))
             print(k)
         im = transition_image_malades(grille, im, coeff)
-        im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_malades'+'.png')
-        gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_malades'+'.png')
+        im.save( str(k)+'_malades'+'.png')
+        gif.append( str(k)+'_malades'+'.png')
         grille.next(virus)
         if k > max_etape:
             break
@@ -195,8 +193,8 @@ def simulation_image_morts(grille, virus):
         k += 1
         
         im = transition_image_morts(grille, im, coeff)
-        im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_morts'+'.png')
-        gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_morts'+'.png')
+        im.save( str(k)+'_morts'+'.png')
+        gif.append( str(k)+'_morts'+'.png')
         grille.next(virus)
         if k > max_etape:
             break
@@ -213,8 +211,8 @@ def simulation_image_gueris(grille, virus):
         k += 1
         
         im = transition_image_gueris(grille, im, coeff)
-        im.save("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_gueris'+'.png')
-        gif.append("D:\\autres\\Me\\Github\\pics\\"+str(k)+'_gueris'+'.png')
+        im.save( str(k)+'_gueris'+'.png')
+        gif.append( str(k)+'_gueris'+'.png')
         grille.next(virus)
         if k > max_etape:
             break
@@ -235,7 +233,7 @@ def create_gif(etat, grille, virus, duration, name):
         return("etat incorrect")
     for filename in filenames:
         images.append(imageio.imread(filename))
-    output_file = "D:\\autres\\Me\\Github\\pics\\"+ name + '-' + etat + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
+    output_file =   name + '-' + etat + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
     imageio.mimsave(output_file, images, duration=duration)
 
 def population (grille):

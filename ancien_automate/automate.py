@@ -1,13 +1,14 @@
 import math
 import random
-
+import matplotlib.pyplot as plt
+import numpy as np
 proba_infection = 0.5
 proba_mort = 0.15
 proba_soin = 0.1
 rayon_infection = 2
 
 
-def init_grid(size):
+def init_grid1(size):
     G = []
     for i in range(size):
         sG = []
@@ -63,8 +64,8 @@ def mort_ou_soigne(p1, p2):
     return 1
 
 
-def etat_suivant(grille):
-    G = init_grid(len(grille))
+def etat_suivant1(grille):
+    G = init_grid1(len(grille))
     for i in range(len(grille)):
         for j in range(len(grille[i])):
             if grille[i][j] == 0:
@@ -130,4 +131,49 @@ def statistiques(taille, echantillon):
     print('\tMin =  {}'.format(min(soignes)))
 
 
-statistiques(100, 10)
+def courbe(taille):
+    grille = init_grid1(taille)
+    etape = 0
+    suivi = [0]
+    sains = [taille**2-1]
+    infectes = [1]
+    morts = [0]
+    soignes = [0]
+    while compte(grille)[1] != 0:
+        etape += 1
+        suivi.append(etape)
+        sains.append(0)
+        infectes.append(0)
+        morts.append(0)
+        soignes.append(0)
+        for i in range(taille):
+            for j in range(taille):
+                if grille[i][j] == 0:
+                    sains[etape] += 1
+                elif grille[i][j] == 1:
+                    infectes[etape] += 1
+                elif grille[i][j] == 2:
+                    morts[etape] += 1
+                else :
+                    soignes[etape] += 1
+        grille = etat_suivant1(grille)
+
+    fig = plt.figure()
+    fig.suptitle('Evolution de la population en fonction du nombre d\'étapes', fontsize=14)
+
+    ax = fig.add_subplot(111)
+    fig.subplots_adjust(top=0.85)
+
+    ax.set_xlabel('Etapes')
+    ax.set_ylabel('Individus')
+
+    etapes = np.array(range(len(sains)))
+
+    sains_courbe, = plt.plot(suivi, sains, label='Sains')
+    infectes_courbe, = plt.plot(suivi, infectes, label='Infectés')
+    morts_courbe, = plt.plot(suivi, morts, label='Morts')
+    soignes_courbe, = plt.plot(suivi, soignes, label='Soignés')
+
+    plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
+
+    plt.show()
