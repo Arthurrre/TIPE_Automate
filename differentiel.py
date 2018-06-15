@@ -1,9 +1,9 @@
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
-proba_infection = 0.9
-proba_mort = 0.2
-proba_soin = 0.1
+proba_infection = 0.05
+proba_mort = 0.001
+proba_soin = 0.2
 virus =[proba_infection, proba_mort, proba_soin]
 pas = 10**-10
 
@@ -24,7 +24,7 @@ def deriver(y, virus):
 def suivant(y_n, virus, pas): 
     k_1 = deriver(y_n, virus)
 
-    y_n_k_2 = [y_n[i] + (pas/2) * k_1[i] for i in range(len( ))]
+    y_n_k_2 = [y_n[i] + (pas/2) * k_1[i] for i in range(len(y_n))]
     k_2 = deriver(y_n_k_2, virus)
 
     y_n_k_3 = [y_n[i] + (pas/2) * k_2[i] for i in range(len(y_n))]
@@ -37,8 +37,8 @@ def suivant(y_n, virus, pas):
     
 def simulation_differentielle(virus, pas):
     L=[]
-    y =(0.95,0.05,0,0)
-    while y[1] > 10**-5:
+    y =(99990,10,0,0)
+    while y[1] > 10**-1:
         L.append(copy.deepcopy(y))
         y = suivant(y, virus, pas)
     return L

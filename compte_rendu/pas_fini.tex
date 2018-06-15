@@ -49,7 +49,7 @@
 \textsc{Introduction}~\\[1cm]
 \end{center}
 
-	L'étude de la propagation des maladies est une science qui remonte à la Grèce Antique, lorsque Hippocrate, au quatrième siècle avant Jésus-Christ, créa les termes d'endémie et d'épidémie afin de qualifier respectivement des maladies liées à des endroits et à des périodes donnés. Mais cette science ne se développa vraiment qu'en 1854, quand John Snow, un médecin britannique, étudia la propagation de l'épidémie de choléra dans les quartiers de Londres. Ce sont là les prémices de l'épidémiologie, l'étude du transport des infections. De nos jours, les méthodes ont évolué et la méthode différentielle, que l'on présentera plus loin, est la plus fréquemment utilisée. Nous nous sommes attardé ici à la simulation par automate cellulaire.
+	L'étude de la propagation des maladies est une science qui remonte à la Grèce Antique, lorsque Hippocrate, au quatrième siècle avant Jésus-Christ, créa les termes d'endémie et d'épidémie afin de qualifier respectivement des maladies liées à des endroits et à des périodes donnés. Mais cette science ne se développa vraiment qu'en 1854, quand John Snow, un médecin britannique, étudia la propagation de l'épidémie de choléra dans les quartiers de Londres. Ce sont là les prémices de l'épidémiologie, l'étude du transport des infections. De nos jours, les méthodes ont évolué et la méthode différentielle, que l'on présentera plus loin, est la plus fréquemment utilisée. Nous nous sommes intéressés ici à la simulation par automates cellulaires.
 
 \section{Première version}
 
@@ -58,20 +58,20 @@
 	Un automate cellulaire est une matrice de cellules, chacune ayant un état appartenant à un ensemble prédéfini. L'état de chaque cellule peut varier au cours du temps suivant une fonction de transfert : l'état de la matrice à l'instant $t+1$ dépend ainsi de son état à l'instant $t$. L'automate doit donc posséder un état initial, c'est-à-dire la matrice des états initiaux des cellules. Même si son principe de base est simple, l'automate cellulaire se complexifie grandement lorsque la taille de la grille augmente, ce qui en fait un modèle couramment utlisé dans l'étude des systèmes complexes.
 
 \subsubsection{Historique}
-	Les automates cellulaires sont plutôt récents. Ils ont été mis au point par John Von Neumann dans son étude des systèmes auto-réplicatifs dans les années 1940. Cette notion a été grandement popularisée par le "jeu de la vie" de John Conway, un automate cellulaire en 2 dimensions paru dans les années 1970. À ce jour, les automates cellulaires ont de nombreuses applications dans divers domaines :
+	Les automates cellulaires sont plutôt récents. Ils ont été mis au point par John Von Neumann dans son étude des systèmes auto-réplicatifs dans les années 1940. Cette notion a été grandement popularisée par le "jeu de la vie" de John Conway, un automate cellulaire en deux dimensions paru dans les années 1970. À ce jour, les automates cellulaires ont de nombreuses applications dans divers domaines :
 	\begin{itemize}
-	\item Diffusion d'un gaz en s'appuyant sur les équations de Navier-Stokes
-	\item Simulation des feux de forêts
-	\item Simulation du trafic routier
+	\item diffusion d'un gaz en s'appuyant sur les équations de Navier-Stokes
+	\item simulation des feux de forêts
+	\item simulation du trafic routier
 	\end{itemize}
 
 \subsubsection{Notre automate cellulaire}
-	Notre automate cellulaire est un automate en deux dimensions qui vise à simuler la propagation d'une épidémie. Les cellules ont donc un état parmi les 4 suivants : Sain, Malade, Guéri, Mort. L'état Sain est l'état initial que chaque cellule sauf une possède à la première étape de la simulation. Lorsqu'une cellule est saine, elle peut tomber malade avec une probabilité $p_1$ s'il y a des malades dans son entourage. L'état Malade est au départ donné à une seule cellule, le "patient zéro". Une cellule malade peut soit mourir avec une probabilité $p_2$ soit guérir avec une probabilité $p_3$. Les cellules mortes ou guéries restent dans cet état indéfiniment, l'hypothèse prise étant qu'une cellule guérie est immunisée et ne peut plus rattraper la maladie. Enfin, la simulation s'arrête lorsqu'il n'y a plus de cellule malade, car l'état de l'automate ne peut alors plus varier.
+	Notre automate cellulaire est un automate en deux dimensions qui vise à simuler la propagation d'une épidémie. Les cellules ont donc un état parmi les quatre suivants : Sain, Malade, Guéri, Mort. L'état Sain est l'état initial que chaque cellule sauf une possède à la première étape de la simulation. Lorsqu'une cellule est saine, elle peut tomber malade avec une probabilité $p_1$ s'il y a des malades dans son entourage. L'état Malade est au départ donné à une seule cellule, le "patient zéro". Une cellule malade peut soit mourir avec une probabilité $p_2$ soit guérir avec une probabilité $p_3$. Les cellules mortes ou guéries restent dans cet état indéfiniment, l'hypothèse prise étant qu'une cellule guérie est immunisée et ne peut plus attraper la maladie. Enfin, la simulation s'arrête lorsqu'il n'y a plus de cellule malade, car l'état de l'automate ne peut alors plus varier.
 
 
 \subsection{Résultats}
 
-Voici quelques étapes d'une simulation de notre automate. Le foyer original -la première cellule infectée- est placée au centre de la grille à l'étape 1. Sur ces images,représentant la grille de l'automate, les cellules saines sont représentées en blanc, celles malades sont rouges, celle guéries sont vertes et celles mortes sont noires.
+Voici quelques étapes d'une simulation de notre automate. Le foyer originel -la première cellule infectée- est placée au centre de la grille à l'étape 1. Sur ces images,représentant la grille de l'automate, les cellules saines sont représentées en blanc, celles malades sont rouges, celle guéries sont vertes et celles mortes sont noires.
 
 \begin{figure}[hbtp]
 \centering
@@ -95,7 +95,7 @@ Voici quelques étapes d'une simulation de notre automate. Le foyer original -la
 
 
 
-Dans la simulation présentée ci-dessus, les probabilités d'infection, de guérison et de mort ont été choisies arbitrairement afin de procurer un visuel clair du comportement de l'automate. Voici encore d'autres exemples de cas possibles de comportement de maladie, dont l'évolution est cette fois-ci représentée sur un graphique donnant le nombre de personnes saines, malades, guéries et mortes au cours des étape de la simulation.
+Dans la simulation présentée ci-dessous, les probabilités d'infection, de guérison et de mort ont été choisies arbitrairement afin de procurer un visuel clair du comportement de l'automate. Voici encore d'autres exemples de cas possibles de comportements de maladie, dont l'évolution est cette fois-ci représentée sur un graphique donnant le nombre de personnes saines, malades, guéries et mortes au cours des étapes de la simulation.
 
 
 
@@ -116,7 +116,7 @@ Dans la simulation présentée ci-dessus, les probabilités d'infection, de gué
 
 Dans cet exemple, la maladie est trop létale pour pouvoir se propager longtemps : les infectés meurent sans avoir eu le temps de contaminer un de leurs voisins.
 \subsection{Limites}
-	Cette version de l'automate cellulaire fournit déjà des résultats intéressants. Cependant, le modèle reste trop simple pour pouvoir modéliser la réalité d'une épidémie. En effet, il est ici supposé que les individus de la population étudiée restent sur place tout en étant étroitement collé les uns aux autres.
+	Cette version de l'automate cellulaire fournit déjà des résultats intéressants. Cependant, le modèle reste trop simple pour pouvoir modéliser la réalité d'une épidémie. En effet, il est ici supposé que les individus de la population étudiée restent sur place tout en étant étroitement collés les uns aux autres.
 Il apparaît ainsi qu'un grand nombre de paramètres a été négligé : il est ici supposé que la population est uniformément répartie, alors qu'en réalité cette densité dépend d'un nombre important de facteurs, comme le type de terrain, les constructions humaines (villes par exemple) ou les conditions météorologiques. De plus, nous supposons aussi que l'épidémie se déroule en un temps assez court pour que les décès naturels et les naissances soient négligeables, tout comme nous négligeons les mesures que pourraient prendre certains gouvernements en cas de pandémies majeures.
 	
 	
@@ -124,11 +124,11 @@ Il apparaît ainsi qu'un grand nombre de paramètres a été négligé : il est 
 \section{Deuxième version}
 
 \subsection{Présentation}
-	Ce deuxième automate prend en compte plus de paramètres : 
+	Ce deuxième automate prend en compte plus de paramètre : 
 	\begin{itemize}
 	\item Nous avons cette fois considéré les cellules comme des zones géographiques plutôt que des individus, ayant une population ainsi qu'une répartition Sains-Malades-Morts-Guéris propre.
 	\item Nous avons pris en compte les densités de population, celles-ci dépendant du 'type' de case, à savoir Ville, Campagne, Montagnes ou Route.
-	\item Nous avons pris en compte les mouvements de population, en fonction de deux paramètres : La probabilité qu'une partie de population quitte une case, et la probabilité qu'une case a d'attirer la population des cases adjacentes.
+	\item Nous avons pris en compte les mouvements de population, en fonction de deux paramètres : la probabilité qu'une partie de population quitte une case, et la probabilité qu'une case a d'attirer la population des cases adjacentes.
 	\end{itemize}
 	
 	Ces ajouts de paramètres permettent une simulation plus fine et plus proche de la réalité. Cela permet d'utiliser de bien meilleure façon les automates cellulaires, qui ont pour avantage de prendre en compte les paramètres géographiques de la simulation.
@@ -138,26 +138,26 @@ Il apparaît ainsi qu'un grand nombre de paramètres a été négligé : il est 
 
 Les résultats graphiques de cet automate permettent d'afficher la densité de population des quatre états au sein de toutes les cellules de la grille. Bien sûr, il n'est maintenant plus possible d'afficher tous les paramètres de la grille sur une seule image. Voici par exemple la répartition des individus sains sur une grille \\[0.6cm]
 
-\includegraphics[scale=2]{images/Frame-1.png} 
-\includegraphics[scale=2]{images/Frame-58.png} 
-\includegraphics[scale=2]{images/Frame-221.png}
+\includegraphics[scale=2]{../images/Frame-1.png} 
+\includegraphics[scale=2]{../images/Frame-58.png} 
+\includegraphics[scale=2]{../images/Frame-221.png}
 
 
-Ici, plus une cellule contient de personnes saines, plus le pixel la représentant sur l'image est blanc. Les cellules sont donc toutes légèrement grisées à la première étape, non pas parce qu'ellles contiennent des individus malades, morts ou guéris, mais parce que le programme étalonne automatiquement les couleurs en fonction de la taille de la grille et de sa population afin de pouvoir intensifier la couleur si la population saine d'une cellule augmente.
-Bien sûr, cette simulation servant d'exemple pour presenter ce nouvel automate, ses cellules possèdent des probabilités de déplacement des populations bien plus élevées que dans la réalité.
+Ici, plus une cellule contient de personnes saines, plus le pixel la représentant sur l'image est blanc. Les cellules sont donc toutes légèrement grisées à la première étape, non pas parce qu'elles contiennent des individus malades, morts ou guéris, mais parce que le programme étalonne automatiquement les couleurs en fonction de la taille de la grille et de sa population afin de pouvoir intensifier la couleur si la population saine d'une cellule augmente.
+Bien sûr, cette simulation servant d'exemple pour présenter ce nouvel automate, ses cellules possèdent des probabilités de déplacement des populations bien plus élevées que dans la réalité.
 On remarque dans la dernière image que l'épidémie a complètement envahie le côté droit avant les coins de gauche. Cet état est bien dû à l'incertitude causée par les probabilités.
  \subsection{Comparaison}
 Ce nouvel automate nous permet donc une modélisation plus précise de l'évolution d'une maladie. Ainsi, nous avons pu comparer nos résultats,comme celui ci-dessous, avec ceux de précédentes études.
 
-\includegraphics[scale=1]{images/tttt.png}
+\includegraphics[scale=1]{../images/tttt.png}
 
-\includegraphics[scale=0.5]{images/tttttttttt.png}   
+\includegraphics[scale=0.5]{../images/tttttttttt.png}   
 
-\includegraphics[scale=0.5]{images/automate_cellulaire_comp.png} 
+\includegraphics[scale=0.5]{../images/automate_cellulaire_comp.png} 
 
 Ci-dessus sont présentés les résultats d'une autre étude avec un automate cellulaire, il apparaît clairement que leurs courbes sont similaires aux nôtres.
 
-\includegraphics[scale=0.5]{images/differentiel_1.png} 
+\includegraphics[scale=0.5]{../images/differentiel_1.png} 
 
 De même, les résultats d'une autre étude utilisant la méthode différentielle concordent également à ceux que nous obtenons.
 
@@ -181,15 +181,26 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 }
 \lstset{breaklines=true}
 
-\lstinputlisting[inputencoding=latin1, language=Python]{tipe_en_cours.py}
+\lstinputlisting[inputencoding=latin1, language=Python]{../tipe_en_cours.py}
 
-\lstinputlisting[inputencoding=latin1, language=Python]{classes.py}
-
-
+\lstinputlisting[inputencoding=latin1, language=Python]{../classes.py}
 
 
-\nocite{*}
+
 \newpage
+
+\paragraph{Commentaire bibliographique\\}
+\noindent
+\cite{ref1} : Cet article nous a permis de bien comprendre la théorie des automates cellulaires, et de mettre l'accent sur les paramètres intéressants qu'une simulation par automate cellulaires permettait de prendre en compte. Il présente aussi les principaux avantages des automates cellulaires par rapport à la méthode différentielle.
+
+\cite{ref2} : Cet article, en plus de présenter un autre modèle d'automates cellulaires, founit une liste relativement exhaustive de paramètres à prendre en compte dans la simulation(même si les auteurs en ont négligé une partie qui ne présentait qu'un  intérêt minime.
+
+\cite{ref3} : Cet article présente plus en profondeur les différences des autres méthodes,  et fournit une approche intéressante en matière de résultats et de leur présentation.
+
+\cite{ref4} : Cet article présente la méthode différentielle, et est très fourni en graphiques bien expliqués.
+
+\cite{ref5} : Ce livre nous a fournit des éléments sur l'histoire de l'épidémiologie.
+
 \bibliographystyle{plain}
 
 \bibliography{bibliographie}
