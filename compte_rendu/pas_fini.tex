@@ -14,6 +14,8 @@
 
 \usepackage{graphicx}
 
+\usepackage{stmaryrd}
+
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 \newcommand{\hsp}{\hspace{20pt}}
@@ -67,7 +69,46 @@
 
 \subsubsection{Notre automate cellulaire}
 	Notre automate cellulaire est un automate en deux dimensions qui vise à simuler la propagation d'une épidémie. Les cellules ont donc un état parmi les quatre suivants : Sain, Malade, Guéri, Mort. L'état Sain est l'état initial que chaque cellule sauf une possède à la première étape de la simulation. Lorsqu'une cellule est saine, elle peut tomber malade avec une probabilité $p_1$ s'il y a des malades dans son entourage. L'état Malade est au départ donné à une seule cellule, le "patient zéro". Une cellule malade peut soit mourir avec une probabilité $p_2$ soit guérir avec une probabilité $p_3$. Les cellules mortes ou guéries restent dans cet état indéfiniment, l'hypothèse prise étant qu'une cellule guérie est immunisée et ne peut plus attraper la maladie. Enfin, la simulation s'arrête lorsqu'il n'y a plus de cellule malade, car l'état de l'automate ne peut alors plus varier.
-
+	
+\paragraph{Calcul des probabilités}
+	Les probabilités d'infection, de soin et de mort que nous avons utilisé ont été calculées à partir de paramètres empiriques tirés d'études réelles. On utilisera en particulier $\tau$, le temps moyen qu'un individu reste infecté, et $R_0$, le nombre moyen d'individus qu'un malade contamine durant son temps de contamination.
+	
+	On cherche d'abord à déterminer la probabilité d'infection. On se place donc dans $(\Omega, P)$ un espace probabilisé fini. On étudie un individu malade entouré de $n$ voisins sains. On considère que l'infection d'un individu sain est indépendante des autres. \\
+	On établira d'abord un résultat préliminaire.\\
+	Soit $X, Y$ deux variables aléatoires réelles sur $\Omega$ et à valeur dans $\llbracket 0, n \rrbracket, n \in \mathbb{N}$, telles que $\forall k \in \llbracket 0, n \rrbracket, X$ sachant que $Y = k$ suit une loi binomiale de paramètres $n-k, p, p \in \left]0, 1\right[$. Alors $E(X) = (n - E(Y))p$.\\
+	On a donc $\forall k \in \llbracket 0, n \rrbracket, E_{\{Y = k\}}(X) = (n - k)p$. Par formule de l'espérance totale, 
+	\begin{align}
+	E(X) &= \sum_{k=0}^n P(Y = k)E_{\{Y = k\}}(X)  \\
+	     &= \sum_{k=0}^n P(Y=k)(n-k)p \\
+		 &= np\sum_{k=0}^n P(Y = k) - p\sum_{k=0}^n kP(Y=k) \\
+		 &= np - pE(Y) \\
+		 &= p(n - E(Y))
+	\end{align}
+	Soit $k \in \llbracket 1, \tau \rrbracket, X_k$ est la variable aléatoire donnant le nombre d'individus qui ont été infectés au jour $k$.\\
+	$X_1 \hookrightarrow B(n, p)$ car on infecte les individus indépendamment.\\ 
+	Au jour $k$ il reste $$n - \sum_{i = 0}^{k-1} X_i$$ individus sains. Montrons par récurrence que $\forall k \in \llbracket 1, \tau \rrbracket, E(X_k) = n(1-p)^{k-1}p$\\
+	
+	$\forall k \in \llbracket 1, \tau \rrbracket$, notons $P(k) = "\forall i \in \llbracket 1, k \rrbracket, E(X_i) = n(1-p)^{i-1}p"$.\\
+	$P(1)$ est vraie car $X_1 \hookrightarrow B(n, p)$.\\
+	Ou bien $\tau = 1$ et c'est fini.\\
+	Ou bien $\tau \ge 2$ et on suppose que $P(k)$ est vraie pour $k \in \in \llbracket 1, \tau - 1 \rrbracket$. Montrons que $P(k+1)$ est vraie.\\
+	$\forall i \in \llbracket 1, k \rrbracket E(X_i) = n(1-p)^{i-1}p$ par $P(k)$. Il reste à calculer $E(X_{k+1})$.\\
+	\begin{align*}
+		E(X_{k+1}) &= p(n - \sum_{i = 1}^n E(X_i)) \\
+		           &= p(n - \sum_{i = 1}^n n(1-p)^{i - 1}p \\
+		           &= np(1-p)^k
+	\end{align*}
+	On conclut par récurrence multiple finie.\\
+	Armés de ces résultats, nous pouvons quasiment calculer $p$, car on a le nombre moyen d'infectés par un malade au cours de sa période d'infection, $R_0$. On a donc 
+	\begin{align*}
+		R_0 &= \sum_{k=1}^\tau E(X_k) \\
+		    &= \sum_{k=1}^\tau np(1-p)^{k-1}\\
+		    &= np\frac{1 - (1-p)^\tau}{p}\\
+		    &= n(1 - (1-p)^\tau)
+	\end{align*}
+	
+	Ce qui nous amène par de brefs calculs à la conclusion : \\
+	$$p = \sqrt[\tau]{\frac{n - R_0}{n}}$$.\\
 
 \subsection{Résultats}
 
