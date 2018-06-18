@@ -2,10 +2,17 @@ import math
 import random
 import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
+from PIL import ImageDraw
+import imageio
 proba_infection = 0.0375
 proba_mort = 0.001
 proba_soin = 0.2
 rayon_infection = 1 
+
+def init_im(taille):
+    im = Image.new("RGB", (taille, taille), "white")
+    return im
 
 def init_grid(size):
     G = []
@@ -161,7 +168,7 @@ def courbe(taille, virus, rayon):
     plt.show()
 
 
-def ancienne_simulation_image(taille):
+def ancienne_simulation_image(taille, virus, rayon):
     im = init_im(taille)
     grille = init_grid(taille)
     etape = 0
@@ -171,7 +178,7 @@ def ancienne_simulation_image(taille):
     k=0
     while compte(grille)[1] != 0:
         k+=1
-        grille = etat_suivant(grille)
+        grille = etat_suivant(grille, virus, rayon)
         im = transition(grille,im)
         im.save(str(k)+'.png')
         gif.append(str(k)+'.png')

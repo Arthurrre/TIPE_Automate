@@ -18,15 +18,15 @@ rayon_virus_colore = 2
 
 # Vieux gifs
 
-simulation_image(taille_grille, ebola, rayon_normal)
-simulation_image(taille_grille, grippe, rayon_normal)
-simulation_image(taille_grille, virus_colore, rayon_virus_colore)
+ancien_automate.ancien_create_gif(ancien_automate.ancienne_simulation_image(taille_grille, ebola, rayon_normal), 0.01, "ebola1")
+ancien_automate.ancien_create_gif(ancien_automate.ancienne_simulation_image(taille_grille, grippe, rayon_normal), 0.01, "grippe1")
+ancien_automate.ancien_create_gif(ancien_automate.ancienne_simulation_image(taille_grille, virus_colore, rayon_virus_colore), 0.01, "colore")
 
 # Nombre moyen d'étapes
 
 nom_fichier = "1er_automate_ebola.pickle"
 
-sains, malades, morts, soignes = ancien_automate.statistiques(taille_grille, 1000, ebola)
+sains, malades, morts, soignes = ancien_automate.statistiques(taille_grille, 1000, ebola, rayon_normal)
 
 with open(nom_fichier, 'wb') as handle:
     pickle.dump([sains, malades, morts, soignes], handle, protocol=pickle.HIGHEST_PROTOCOL)
@@ -34,7 +34,7 @@ with open(nom_fichier, 'wb') as handle:
 
 nom_fichier = "1er_automate_grippe.pickle"
 
-sains, malades, morts, soignes = ancien_automate.statistiques(taille_grille, 1000, grippe)
+sains, malades, morts, soignes = ancien_automate.statistiques(taille_grille, 1000, grippe, rayon_normal)
 
 with open(nom_fichier, 'wb') as handle:
     pickle.dump([sains, malades, morts, soignes], handle, protocol=pickle.HIGHEST_PROTOCOL)
