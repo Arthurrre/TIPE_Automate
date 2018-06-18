@@ -70,29 +70,29 @@
 \subsubsection{Notre automate cellulaire}
 	Notre automate cellulaire est un automate en deux dimensions qui vise à simuler la propagation d'une épidémie. Les cellules ont donc un état parmi les quatre suivants : Sain, Malade, Guéri, Mort. L'état Sain est l'état initial que chaque cellule sauf une possède à la première étape de la simulation. Lorsqu'une cellule est saine, elle peut tomber malade avec une probabilité $p_1$ s'il y a des malades dans son entourage. L'état Malade est au départ donné à une seule cellule, le "patient zéro". Une cellule malade peut soit mourir avec une probabilité $p_2$ soit guérir avec une probabilité $p_3$. Les cellules mortes ou guéries restent dans cet état indéfiniment, l'hypothèse prise étant qu'une cellule guérie est immunisée et ne peut plus attraper la maladie. Enfin, la simulation s'arrête lorsqu'il n'y a plus de cellule malade, car l'état de l'automate ne peut alors plus varier.
 	
-\paragraph{Calcul des probabilités}
+\paragraph{Calcul des probabilités\\}
 	Les probabilités d'infection, de soin et de mort que nous avons utilisé ont été calculées à partir de paramètres empiriques tirés d'études réelles. On utilisera en particulier $\tau$, le temps moyen qu'un individu reste infecté, et $R_0$, le nombre moyen d'individus qu'un malade contamine durant son temps de contamination.
 	
 	On cherche d'abord à déterminer la probabilité d'infection. On se place donc dans $(\Omega, P)$ un espace probabilisé fini. On étudie un individu malade entouré de $n$ voisins sains. On considère que l'infection d'un individu sain est indépendante des autres. \\
 	On établira d'abord un résultat préliminaire.\\
-	Soit $X, Y$ deux variables aléatoires réelles sur $\Omega$ et à valeur dans $\llbracket 0, n \rrbracket, n \in \mathbb{N}$, telles que $\forall k \in \llbracket 0, n \rrbracket, X$ sachant que $Y = k$ suit une loi binomiale de paramètres $n-k, p, p \in \left]0, 1\right[$. Alors $E(X) = (n - E(Y))p$.\\
+	Soit $X, Y$ deux variables aléatoires réelles sur $\Omega$ et à valeur dans $\llbracket 0, n \rrbracket, n \in \mathbb{N}$, telles que $\forall k \in \llbracket 0, n \rrbracket, X$ sachant que $Y = k$ suit une loi binomiale de paramètres $(n-k, p), p \in \left]0, 1\right[$.\\ \underline{Alors $E(X) = (n - E(Y))p$.}\\[0.2cm]
 	On a donc $\forall k \in \llbracket 0, n \rrbracket, E_{\{Y = k\}}(X) = (n - k)p$. Par formule de l'espérance totale, 
-	\begin{align}
+	\begin{align*}
 	E(X) &= \sum_{k=0}^n P(Y = k)E_{\{Y = k\}}(X)  \\
 	     &= \sum_{k=0}^n P(Y=k)(n-k)p \\
 		 &= np\sum_{k=0}^n P(Y = k) - p\sum_{k=0}^n kP(Y=k) \\
 		 &= np - pE(Y) \\
 		 &= p(n - E(Y))
-	\end{align}
+	\end{align*}
 	Soit $k \in \llbracket 1, \tau \rrbracket, X_k$ est la variable aléatoire donnant le nombre d'individus qui ont été infectés au jour $k$.\\
 	$X_1 \hookrightarrow B(n, p)$ car on infecte les individus indépendamment.\\ 
-	Au jour $k$ il reste $$n - \sum_{i = 0}^{k-1} X_i$$ individus sains. Montrons par récurrence que $\forall k \in \llbracket 1, \tau \rrbracket, E(X_k) = n(1-p)^{k-1}p$\\
+	Au jour $k$ il reste $$n - \sum_{i = 0}^{k-1} X_i$$ individus sains.\\[0.2cm] \underline{Montrons par récurrence que $\forall k \in \llbracket 1, \tau \rrbracket, E(X_k) = n(1-p)^{k-1}p$}\\[0.2cm]
 	
-	$\forall k \in \llbracket 1, \tau \rrbracket$, notons $P(k) = "\forall i \in \llbracket 1, k \rrbracket, E(X_i) = n(1-p)^{i-1}p"$.\\
-	$P(1)$ est vraie car $X_1 \hookrightarrow B(n, p)$.\\
-	Ou bien $\tau = 1$ et c'est fini.\\
-	Ou bien $\tau \ge 2$ et on suppose que $P(k)$ est vraie pour $k \in \in \llbracket 1, \tau - 1 \rrbracket$. Montrons que $P(k+1)$ est vraie.\\
-	$\forall i \in \llbracket 1, k \rrbracket E(X_i) = n(1-p)^{i-1}p$ par $P(k)$. Il reste à calculer $E(X_{k+1})$.\\
+	\underline{$\forall k \in \llbracket 1, \tau \rrbracket$, notons $P(k) = "\forall i \in \llbracket 1, k \rrbracket, E(X_i) = n(1-p)^{i-1}p"$}.\\[0.2cm]
+	\underline{$P(1)$ est vraie} car $X_1 \hookrightarrow B(n, p)$.\\[0.2cm]
+	\underline{Ou bien $\tau = 1$} et c'est fini.\\[0.2cm]
+	\underline{Ou bien $\tau \ge 2$} et on \underline{suppose que $P(k)$ est vraie pour $k \in \llbracket 1, \tau - 1 \rrbracket$. Montrons que $P(k+1)$ est vraie.}\\[0.2cm]
+	$\forall i \in \llbracket 1, k \rrbracket, E(X_i) = n(1-p)^{i-1}p$ par $P(k)$. Il reste à calculer $E(X_{k+1})$.\\
 	\begin{align*}
 		E(X_{k+1}) &= p(n - \sum_{i = 1}^n E(X_i)) \\
 		           &= p(n - \sum_{i = 1}^n n(1-p)^{i - 1}p \\
@@ -108,7 +108,22 @@
 	\end{align*}
 	
 	Ce qui nous amène par de brefs calculs à la conclusion : \\
-	$$p = \sqrt[\tau]{\frac{n - R_0}{n}}$$.\\
+	$$p = 1 - \sqrt[\tau]{\frac{n - R_0}{n}}$$.\\
+	
+	On cherchera désormais à calculer la probabilité de ne plus être malade, c'est à dire ou bien de guérir ou bien de mourir, c'est à dire $p_{\text{mort}} + p_{\text{guérison}} = q$. Si l'on considère un individu qui est infecté au jour $0$, et que l'on considère la variable aléatoire $X$ donnant le jour de guérison(sachant qu'on ne peut guérir le jour de son infection), $\forall k \in \mathbb{N}^*, P(X=k) = (1-q)^{k-1}q$.\\
+	X suit donc une loi géométrique et son espérance, c'est à dire le nombre de jour où l'individu restera malade($\tau$) vaut par propriété $\frac{1}{q}$.\\
+	On a donc $$ q = \frac{1}{\tau}$$\\
+	
+
+Enfin pour calculer la probabilité de mourir, il suffit de faire $mq$, où $m$ est la mortalité de la maladie, et la probabilité de guérir vaut $(1-m)q$. \\
+Les résultats réels sont récapitulés dans le tableau suivant :
+
+\begin{tabular} {| p{2cm} | p{2cm}| p{2cm} | p{2cm} |}
+	\hline
+	Maladie & $p_{infection}$ & $p_{mort}$ & $p_{guerison}$ \\ \hline
+	Ebola & $0.0201$ & $0.0818$ & $0.00909$ \\
+	\hline
+\end{tabular}
 
 \subsection{Résultats}
 
@@ -234,7 +249,7 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 \noindent
 \cite{ref1} : Cet article nous a permis de bien comprendre la théorie des automates cellulaires, et de mettre l'accent sur les paramètres intéressants qu'une simulation par automate cellulaires permettait de prendre en compte. Il présente aussi les principaux avantages des automates cellulaires par rapport à la méthode différentielle.
 
-\cite{ref2} : Cet article, en plus de présenter un autre modèle d'automates cellulaires, founit une liste relativement exhaustive de paramètres à prendre en compte dans la simulation(même si les auteurs en ont négligé une partie qui ne présentait qu'un  intérêt minime.
+\cite{ref2} : Cet article, en plus de présenter un autre modèle d'automates cellulaires, fourni une liste relativement exhaustive de paramètres à prendre en compte dans la simulation(même si les auteurs en ont négligé une partie qui ne présentait qu'un  intérêt minime.
 
 \cite{ref3} : Cet article présente plus en profondeur les différences des autres méthodes,  et fournit une approche intéressante en matière de résultats et de leur présentation.
 
