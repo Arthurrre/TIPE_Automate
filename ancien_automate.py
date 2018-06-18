@@ -7,11 +7,7 @@ proba_mort = 0.001
 proba_soin = 0.2
 rayon_infection = 1 
 
-virus_colore = [0.2, 0.25, 0.2]
-rayon_virus_colore = 2
-
-
-def init_grid1(size):
+def init_grid(size):
     G = []
     for i in range(size):
         sG = []
@@ -65,16 +61,15 @@ def mort_ou_soigne(p1, p2):
     return 1
 
 
-def etat_suivant1(grille):
-    G = init_grid1(len(grille))
+def etat_suivant(grille, virus, rayon):
+    G = init_grid(len(grille))
     for i in range(len(grille)):
         for j in range(len(grille[i])):
             if grille[i][j] == 0:
                 contacts = contact(grille, i, j)
-                G[i][j] = binomial(calcul_proba_infection(
-                    contacts, rayon_infection, proba_infection, i, j))
+                G[i][j] = binomial(calcul_proba_infection(contacts, rayon, virus[0], i, j))
             elif grille[i][j] == 1:
-                G[i][j] = mort_ou_soigne(proba_mort, proba_infection)
+                G[i][j] = mort_ou_soigne(virus[1], virus[2])
             else:
                 G[i][j] = grille[i][j]
 
@@ -95,45 +90,31 @@ def print_grille(grille):
         print(i)
 
 
-def simulation(taille):
+def simulation(taille, virus, rayon):
     grille = init_grid(taille)
     etape = 0
     while compte(grille)[1] != 0:
         etape += 1
-        grille = etat_suivant(grille)
+        grille = etat_suivant(grille, virus, rayon)
 
     return etape, compte(grille)
 
 
-def statistiques(taille, echantillon):
+def statistiques(taille, echantillon, virus, rayon):
     etapes = []
     comptes = []
 
     for i in range(echantillon):
-        etape, compte = simulation(taille)
+        etape, compte = simulation(taille, virus, rayon)
         etapes.append(etape)
         comptes.append(compte)
-        print(i)
 
     sains, infectes, morts, soignes = zip(*comptes)
-    print('Moyenne = {}'.format(sum(etapes) / len(etapes)))
-    print('Max = {}'.format(max(etapes)))
-    print('Sains:\n\tMoyenne =  {}'.format(sum(sains) / len(sains)))
-    print('\tMax =  {}'.format(max(sains)))
-    print('\tMin =  {}'.format(min(sains)))
-    print('Infectés:\n\tMoyenne =  {}'.format(sum(infectes) / len(infectes)))
-    print('\tMax =  {}'.format(max(infectes)))
-    print('\tMin =  {}'.format(min(infectes)))
-    print('Morts:\n\tMoyenne =  {}'.format(sum(morts) / len(morts)))
-    print('\tMax =  {}'.format(max(morts)))
-    print('\tMin =  {}'.format(min(morts)))
-    print('Soignés:\n\tMoyenne =  {}'.format(sum(soignes) / len(soignes)))
-    print('\tMax =  {}'.format(max(soignes)))
-    print('\tMin =  {}'.format(min(soignes)))
+    return sains, infectes, morts, soignes
 
 
-def courbe(taille):
-    grille = init_grid1(taille)
+def courbe(taille, virus, rayon):
+    grille = init_grid(taille)
     etape = 0
     suivi = [0]
     sains = [taille**2-1]
@@ -157,7 +138,7 @@ def courbe(taille):
                     morts[etape] += 1
                 else :
                     soignes[etape] += 1
-        grille = etat_suivant1(grille)
+        grille = etat_suivant(grille, virus, rayon)
 
     fig = plt.figure()
     fig.suptitle('Evolution de la population en fonction du nombre d\'étapes', fontsize=14)

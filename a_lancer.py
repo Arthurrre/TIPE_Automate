@@ -1,6 +1,6 @@
 from tipe_en_cours import *
 from classes import *
-from ancien_automate import *
+import ancien_automate
 import pickle
 
 taille_grille = 50
@@ -9,11 +9,37 @@ malades_initiaux = 300
 x_malade_initial = 25
 y_malade_initial = 25
 
-ebola = []
+ebola = [0.0187, 0.0818, 0.00909]
+grippe = [0.406, 0.0002, 0.1998]
+rayon_normal = 1
+
+virus_colore = [0.2, 0.25, 0.2]
+rayon_virus_colore = 2
+
+# Vieux gifs
+
+simulation_image(taille_grille, ebola, rayon_normal)
+simulation_image(taille_grille, grippe, rayon_normal)
+simulation_image(taille_grille, virus_colore, rayon_virus_colore)
+
+# Nombre moyen d'étapes
+
+nom_fichier = "1er_automate_ebola.pickle"
+
+sains, malades, morts, soignes = ancien_automate.statistiques(taille_grille, 1000, ebola)
+
+with open(nom_fichier, 'wb') as handle:
+    pickle.dump([sains, malades, morts, soignes], handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+nom_fichier = "1er_automate_grippe.pickle"
+
+sains, malades, morts, soignes = ancien_automate.statistiques(taille_grille, 1000, grippe)
+
+with open(nom_fichier, 'wb') as handle:
+    pickle.dump([sains, malades, morts, soignes], handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 GEO2 = [[3 for i in range(taille_grille)] for j in range(taille_grille)]
-
-virus = [0.8, 0.2, 0.2]
 
 # On fait varier le nombre de villes
 
@@ -36,12 +62,7 @@ create_gif("mort", g, ebola, 0.01, "1_ville_mort")
 
 g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
-
-simulation_image_malades(g, virus)
-
-
-
-sains, malades, morts, soignes = statistiques_finale(g, virus, 10)
+sains, malades, morts, soignes = statistiques_finale(g, ebola, 100)
 
 nom_fichier = "1_ville_repartitions.pickle"
 
@@ -68,11 +89,7 @@ g = Grille(taille_grille, GEO2, population_initiale)
 g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
 
-simulation_image_malades(g, virus)
-
-
-
-sains, malades, morts, soignes = statistiques_finale(g, virus, 10)
+sains, malades, morts, soignes = statistiques_finale(g, ebola, 100)
 
 nom_fichier = "2_ville_repartitions.pickle"
 
@@ -98,11 +115,7 @@ create_gif("mort", g, ebola, 0.01, "3_ville_mort")
 g = Grille(taille_grille, GEO2, population_initiale)
 g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
-
-simulation_image_malades(g, virus)
-
-
-sains, malades, morts, soignes = statistiques_finale(g, virus, 10)
+sains, malades, morts, soignes = statistiques_finale(g, ebola, 100)
 
 nom_fichier = "3_ville_repartitions.pickle"
 
