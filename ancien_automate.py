@@ -159,3 +159,31 @@ def courbe(taille, virus, rayon):
     plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
 
     plt.show()
+
+
+def ancienne_simulation_image(taille):
+    im = init_im(taille)
+    grille = init_grid(taille)
+    etape = 0
+    plt.imshow(im)
+    plt.show
+    gif=[]
+    k=0
+    while compte(grille)[1] != 0:
+        k+=1
+        grille = etat_suivant(grille)
+        im = transition(grille,im)
+        im.save(str(k)+'.png')
+        gif.append(str(k)+'.png')
+    im = transition(grille,im)
+    plt.imshow(im)
+    plt.show()
+    return gif
+    
+
+def ancien_create_gif(filenames, duration,name):
+    images = []
+    for filename in filenames:
+        images.append(imageio.imread(filename))
+    output_file = name + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
+    imageio.mimsave(output_file, images, duration=duration)
