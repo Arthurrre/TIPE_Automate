@@ -167,7 +167,28 @@ def courbe(taille, virus, rayon):
 
     plt.show()
 
-
+def ancienne_transition(tab,im):
+    for i in range(len(tab)):
+        for j in range(len(tab)):
+            if tab[i][j]==0:
+                for k in range(int(20//len(tab)**0.3)*i,int(20//len(tab)**0.3)*(i+1)):
+                    for l in range(int(20//len(tab)**0.3)*j,int(20//len(tab)**0.3)*(j+1)):
+                        im.putpixel((k,l),(255,255,255))
+            elif tab[i][j]==1:
+                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
+                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
+                        im.putpixel((k,l),(255,0,0))
+            elif tab[i][j]==2:
+                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
+                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
+                        im.putpixel((k,l),(0,0,0))
+            elif tab[i][j]==3:
+                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
+                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
+                        im.putpixel((k,l),(0,255,0))
+    return im
+    
+    
 def ancienne_simulation_image(taille, virus, rayon):
     im = init_im(taille)
     grille = init_grid(taille)
@@ -179,10 +200,10 @@ def ancienne_simulation_image(taille, virus, rayon):
     while compte(grille)[1] != 0:
         k+=1
         grille = etat_suivant(grille, virus, rayon)
-        im = transition(grille,im)
+        im = ancienne_transition(grille,im)
         im.save(str(k)+'.png')
         gif.append(str(k)+'.png')
-    im = transition(grille,im)
+    im = ancienne_transition(grille,im)
     plt.imshow(im)
     plt.show()
     return gif

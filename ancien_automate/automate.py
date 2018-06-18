@@ -2,10 +2,10 @@ import math
 import random
 import matplotlib.pyplot as plt
 import numpy as np
-proba_infection = 0.5
-proba_mort = 0.15
-proba_soin = 0.1
-rayon_infection = 2
+proba_infection = 0.0375
+proba_mort = 0.001
+proba_soin = 0.2
+rayon_infection = 1 
 
 
 def init_grid1(size):
@@ -45,9 +45,7 @@ def contact(grille, i, j):
 # de la densité de population
 
 def calcul_proba_infection(contacts, rayon, base_proba, i, j):
-    max_contact = (1 + 2 * rayon)**2 - 1
-    voisins_ponderee = base_proba * math.log(1 + contacts) / math.log(1 + max_contact)
-    return voisins_ponderee
+    return contacts * base_proba
 
 
 def binomial(p):
