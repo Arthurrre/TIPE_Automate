@@ -5,7 +5,6 @@ proba_infection = 0.05
 proba_mort = 0.001
 proba_soin = 0.2
 virus =[proba_infection, proba_mort, proba_soin]
-pas = 10**-10
 
 def deriver(y, virus):
     proba_infection = virus[0]
@@ -49,12 +48,12 @@ def courbe_differentielle(virus, pas):
     for i in range(len(resultat)):
         suivi.append(i)
     fig = plt.figure()
-    fig.suptitle('Evolution de la population en fonction du nombre d\'étapes', fontsize=14)
+    fig.suptitle('Evolution de la population en fonction du temps', fontsize=14)
 
     ax = fig.add_subplot(111)
     fig.subplots_adjust(top=0.85)
 
-    ax.set_xlabel('Etapes')
+    ax.set_xlabel('Jours')
     ax.set_ylabel('Individus')
     
     print(len(resultat))
