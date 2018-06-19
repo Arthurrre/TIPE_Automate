@@ -35,7 +35,7 @@ def compte(grille):
     return compteur
 
 
-def statistiques_finale(grille, virus, quantite):
+def statistiques_final(grille, virus, quantite):
 
     # Ces variables sont des listes de listes, qui contiennent la variation de la population
     # au cours du temps, pour chaque itération
@@ -47,7 +47,7 @@ def statistiques_finale(grille, virus, quantite):
 
     for i in range(quantite):
         nouvelle_grille = copy.deepcopy(grille)
-        sain, infecte, mort, soigne = statistiques_2(nouvelle_grille, virus)
+        sain, infecte, mort, soigne = statistiques_liste(nouvelle_grille, virus)
         sains.append(sain)
         infectes.append(infecte)
         morts.append(mort)
@@ -56,12 +56,11 @@ def statistiques_finale(grille, virus, quantite):
     return sains, infectes, morts, soignes
         
 
-def statistiques_2(grille, virus):
+def statistiques_liste(grille, virus):
     k = 0
     stats = []
     while compte(grille)[1] != 0:
         k += 1
-        print(grille_pop_sum(grille))
         stats.append(grille.stats())
         grille.next(virus)
         if k > max_etape:
