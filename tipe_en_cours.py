@@ -9,6 +9,7 @@ from PIL import ImageDraw
 from scipy import ndimage
 import math
 import os
+import copy
 ##
 
 
@@ -17,13 +18,8 @@ proba_mort = 0.25
 proba_soin = 0.1
 rayon_infection = 2
 
-max_etape = 399
-
-
-def init_grid(size):
-    GEO = [[3, 3, 3], [3, 90, 3], [3, 3, 3]]
-    g = Grille(3, GEO, 10000000)
-    return g
+min_etape = 200
+max_etape = 400
 
 def compte(grille):
     compteur = [0, 0, 0, 0]
@@ -59,7 +55,7 @@ def statistiques_final(grille, virus, quantite):
 def statistiques_liste(grille, virus):
     k = 0
     stats = []
-    while compte(grille)[1] != 0:
+    while k < min_etape or compte(grille)[1] >= 10 * grille.taille ** 2:
         k += 1
         stats.append(grille.stats())
         grille.next(virus)
@@ -69,15 +65,16 @@ def statistiques_liste(grille, virus):
     return zip(*stats)
 
 
-
-    """
+def statistiques_courbe(grille, virus):
+    r = list(statistiques_liste(grille, virus))
+    sains, infectes, morts, soignes = r[0], r[1], r[2], r[3]
     fig = plt.figure()
-    fig.suptitle('Evolution de la population en fonction du nombre d\'étapes', fontsize=14)
+    fig.suptitle('Évolution de la population en fonction du temps', fontsize=14)
 
     ax = fig.add_subplot(111)
     fig.subplots_adjust(top=0.85)
 
-    ax.set_xlabel('Etapes')
+    ax.set_xlabel('Jours')
     ax.set_ylabel('Individus')
 
     etapes = np.array(range(len(sains)))
@@ -90,7 +87,8 @@ def statistiques_liste(grille, virus):
     plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
 
     plt.show()
-"""
+
+
 def init_im(taille):
     im = Image.new("RGB", (taille, taille), "white")
     return im
@@ -146,9 +144,7 @@ def simulation_image_sains(grille, virus):
     k = 0
     moyenne = grille.population_initiale//grille.taille**2
     coeff = 127/moyenne 
-    print(moyenne,coeff)
     while compte(grille)[1] != 0:
-        print(population(g)[0])
         k += 1
         
         im = transition_image_sains(grille, im, coeff)
@@ -167,10 +163,10 @@ def simulation_image_malades(grille, virus):
     k = 0
     moyenne = grille.population_initiale//grille.taille**2
     coeff = 127/moyenne 
-    print(moyenne,coeff)
+
     while compte(grille)[1] != 0:
         k += 1
-        if sum(compte(grille)) > grille.population_initiale:
+        if sum(compte(grille)) > 2 * grille.population_initiale:
             print(compte(grille))
             print(k)
         im = transition_image_malades(grille, im, coeff)
@@ -187,7 +183,6 @@ def simulation_image_morts(grille, virus):
     k = 0
     moyenne = grille.population_initiale//grille.taille**2
     coeff = 127/moyenne 
-    print(moyenne,coeff)
     while compte(grille)[1] != 0:
         k += 1
         
@@ -205,7 +200,6 @@ def simulation_image_gueris(grille, virus):
     k = 0
     moyenne = grille.population_initiale//grille.taille**2
     coeff = 127/moyenne 
-    print(moyenne,coeff)
     while compte(grille)[1] != 0:
         k += 1
         
@@ -233,7 +227,8 @@ def create_gif(etat, grille, virus, duration, name):
     for filename in filenames:
         images.append(imageio.imread(filename))
     output_file =   name + '-' + etat + '-%s.gif' % datetime.datetime.now().strftime('%Y-%M-%d-%H-%M-%S')
-    imageio.mimsave(output_file, images, duration=duration)
+    if images != []:
+        imageio.mimsave(output_file, images, duration=duration)
 
 def population (grille):
     S=0

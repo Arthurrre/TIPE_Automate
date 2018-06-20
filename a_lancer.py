@@ -3,11 +3,11 @@ from classes import *
 import ancien_automate
 import pickle
 
-taille_grille = 50
+taille_grille = 10
 population_initiale = 1000000000
 malades_initiaux = 300
-x_malade_initial = 25
-y_malade_initial = 25
+x_malade_initial = taille_grille // 2
+y_malade_initial = taille_grille // 2
 
 ebola = [0.0187, 0.0818, 0.00909]
 grippe = [0.406, 0.0002, 0.1998]
@@ -51,13 +51,20 @@ for x, y in ville:
     GEO2[x][y] = 90
 
 g = Grille(taille_grille, GEO2, population_initiale)
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 create_gif("malade", g, ebola, 0.01, "1_ville_malade")
+
 g = Grille(taille_grille, GEO2, population_initiale)
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 create_gif("sain", g, ebola, 0.01, "1_ville_sain")
+
 g = Grille(taille_grille, GEO2, population_initiale)
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 create_gif("gueri", g, ebola, 0.01, "1_ville_gueri")
+
 g = Grille(taille_grille, GEO2, population_initiale)
 create_gif("mort", g, ebola, 0.01, "1_ville_mort")
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
 
 g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
@@ -78,17 +85,23 @@ for x, y in ville:
 
 g = Grille(taille_grille, GEO2, population_initiale)
 create_gif("malade", g, ebola, 0.01, "2_ville_malade")
-g = Grille(taille_grille, GEO2, population_initiale)
-create_gif("sain", g, ebola, 0.01, "2_ville_sain")
-g = Grille(taille_grille, GEO2, population_initiale)
-create_gif("gueri", g, ebola, 0.01, "2_ville_gueri")
-g = Grille(taille_grille, GEO2, population_initiale)
-create_gif("mort", g, ebola, 0.01, "2_ville_mort")
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
 g = Grille(taille_grille, GEO2, population_initiale)
+create_gif("sain", g, ebola, 0.01, "2_ville_sain")
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
+
+g = Grille(taille_grille, GEO2, population_initiale)
+create_gif("gueri", g, ebola, 0.01, "2_ville_gueri")
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
+
+g = Grille(taille_grille, GEO2, population_initiale)
+create_gif("mort", g, ebola, 0.01, "2_ville_mort")
 g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
 
+g = Grille(taille_grille, GEO2, population_initiale)
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 sains, malades, morts, soignes = statistiques_final(g, ebola, 100)
 
 nom_fichier = "2_ville_repartitions.pickle"
@@ -105,12 +118,19 @@ for x, y in ville:
 
 g = Grille(taille_grille, GEO2, population_initiale)
 create_gif("malade", g, ebola, 0.01, "3_ville_malade")
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
+
 g = Grille(taille_grille, GEO2, population_initiale)
 create_gif("sain", g, ebola, 0.01, "3_ville_sain")
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
+
 g = Grille(taille_grille, GEO2, population_initiale)
 create_gif("gueri", g, ebola, 0.01, "3_ville_gueri")
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
+
 g = Grille(taille_grille, GEO2, population_initiale)
 create_gif("mort", g, ebola, 0.01, "3_ville_mort")
+g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
 g = Grille(taille_grille, GEO2, population_initiale)
 g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux

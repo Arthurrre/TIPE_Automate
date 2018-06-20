@@ -97,8 +97,8 @@ class Grille:
                     attractivite = 0.1
                     proba_mvt = 0.1
                 elif(geographie[i][j] == ville):
-                    attractivite = 0.3
-                    proba_mvt = 0.5
+                    attractivite = 0.5
+                    proba_mvt = 0.3
                 elif(geographie[i][j] == route):
                     attractivite = 0.7
                     proba_mvt = 0.7

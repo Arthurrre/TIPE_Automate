@@ -5,6 +5,7 @@ import numpy as np
 from PIL import Image
 from PIL import ImageDraw
 import imageio
+import datetime
 proba_infection = 0.0375
 proba_mort = 0.001
 proba_soin = 0.2
@@ -171,30 +172,28 @@ def old_transition(tab,im):
     for i in range(len(tab)):
         for j in range(len(tab)):
             if tab[i][j]==0:
-                for k in range(int(20//len(tab)**0.3)*i,int(20//len(tab)**0.3)*(i+1)):
-                    for l in range(int(20//len(tab)**0.3)*j,int(20//len(tab)**0.3)*(j+1)):
+                for k in range(int(1000/len(tab))*i,int(1000/len(tab))*(i+1)):
+                    for l in range(int(1000/len(tab))*j,int(1000/len(tab))*(j+1)):
                         im.putpixel((k,l),(255,255,255))
             elif tab[i][j]==1:
-                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
-                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
+                for k in range(int(1000/len(tab))*i,int(1000/len(tab))*(i+1)):
+                    for l in range(int(1000/len(tab))*j,int(1000/len(tab))*(j+1)):
                         im.putpixel((k,l),(255,0,0))
             elif tab[i][j]==2:
-                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
-                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
+                for k in range(int(1000/len(tab))*i,int(1000/len(tab))*(i+1)):
+                    for l in range(int(1000/len(tab))*j,int(1000/len(tab))*(j+1)):
                         im.putpixel((k,l),(0,0,0))
             elif tab[i][j]==3:
-                for k in range(int((20//len(tab)**0.3))*i,int((20//len(tab)**0.3))*(i+1)):
-                    for l in range(int((20//len(tab)**0.3))*j,int((20//len(tab)**0.3))*(j+1)):
+                for k in range(int(1000/len(tab))*i,int(1000/len(tab))*(i+1)):
+                    for l in range(int(1000/len(tab))*j,int(1000/len(tab))*(j+1)):
                         im.putpixel((k,l),(0,255,0))
     return im
     
     
 def old_simulation_image(taille, virus, rayon):
-    im = old_init_im(taille)
+    nouvelle_taille = taille * int(1000/taille)
+    im = old_init_im(nouvelle_taille)
     grille = old_init_grid(taille)
-    etape = 0
-    plt.imshow(im)
-    plt.show
     gif=[]
     k=0
     while old_compte(grille)[1] != 0:
@@ -204,8 +203,6 @@ def old_simulation_image(taille, virus, rayon):
         im.save(str(k)+'.png')
         gif.append(str(k)+'.png')
     im = old_transition(grille,im)
-    plt.imshow(im)
-    plt.show()
     return gif
     
 
