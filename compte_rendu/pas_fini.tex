@@ -56,10 +56,10 @@
 \section{Première version}
 
 \subsection{Présentation}
-\subsubsection{Définition formelle}
+\paragraph{Définition formelle\\[0.2cm]}
 	Un automate cellulaire est une matrice de cellules, chacune ayant un état appartenant à un ensemble prédéfini. L'état de chaque cellule peut varier au cours du temps suivant une fonction de transfert : l'état de la matrice à l'instant $t+1$ dépend ainsi de son état à l'instant $t$. L'automate doit donc posséder un état initial, c'est-à-dire la matrice des états initiaux des cellules. Même si son principe de base est simple, l'automate cellulaire se complexifie grandement lorsque la taille de la grille augmente, ce qui en fait un modèle couramment utlisé dans l'étude des systèmes complexes.
 
-\subsubsection{Historique}
+\paragraph{Historique\\[0.2cm]}
 	Les automates cellulaires sont plutôt récents. Ils ont été mis au point par John Von Neumann dans son étude des systèmes auto-réplicatifs dans les années 1940. Cette notion a été grandement popularisée par le "jeu de la vie" de John Conway, un automate cellulaire en deux dimensions paru dans les années 1970. À ce jour, les automates cellulaires ont de nombreuses applications dans divers domaines :
 	\begin{itemize}
 	\item diffusion d'un gaz en s'appuyant sur les équations de Navier-Stokes
@@ -67,10 +67,10 @@
 	\item simulation du trafic routier
 	\end{itemize}
 
-\subsubsection{Notre automate cellulaire}
+\paragraph{Notre automate cellulaire\\[0.2cm]}
 	Notre automate cellulaire est un automate en deux dimensions qui vise à simuler la propagation d'une épidémie. Les cellules ont donc un état parmi les quatre suivants : Sain, Malade, Guéri, Mort. L'état Sain est l'état initial que chaque cellule sauf une possède à la première étape de la simulation. Lorsqu'une cellule est saine, elle peut tomber malade avec une probabilité $p_1$ s'il y a des malades dans son entourage. L'état Malade est au départ donné à une seule cellule, le "patient zéro". Une cellule malade peut soit mourir avec une probabilité $p_2$ soit guérir avec une probabilité $p_3$. Les cellules mortes ou guéries restent dans cet état indéfiniment, l'hypothèse prise étant qu'une cellule guérie est immunisée et ne peut plus attraper la maladie. Enfin, la simulation s'arrête lorsqu'il n'y a plus de cellule malade, car l'état de l'automate ne peut alors plus varier.
 	
-\paragraph{Calcul des probabilités\\}
+\paragraph{Calcul des probabilités\\[0.2cm]}
 	Les probabilités d'infection, de soin et de mort que nous avons utilisé ont été calculées à partir de paramètres empiriques tirés d'études réelles. On utilisera en particulier $\tau$, le temps moyen qu'un individu reste infecté, et $R_0$, le nombre moyen d'individus qu'un malade contamine durant son temps de contamination.
 	
 	On cherche d'abord à déterminer la probabilité d'infection. On se place donc dans $(\Omega, P)$ un espace probabilisé fini. On étudie un individu malade entouré de $n$ voisins sains. On considère que l'infection d'un individu sain est indépendante des autres. \\
@@ -218,6 +218,7 @@ Ci-dessus sont présentés les résultats d'une autre étude avec un automate ce
 De même, les résultats d'une autre étude utilisant la méthode différentielle concordent également à ceux que nous obtenons.
 
 \section{Méthode différentielle}
+\subsection{Équations}
 	On peut aussi simuler les épidémies par la méthode différentielle. Nous nous sommes basés sur le modèle SIR, c'est à dire le modèle sains, infectés, rétablis. Les équations sont les suivantes :\\
 	\begin{align}
 		&\frac{dS(t)}{dt} = - \beta I(t)S(t) \\
@@ -228,6 +229,9 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 	
 	Ces équations différentielles, une fois résolues, donnent des courbes d'évolution des populations que nous présenterons plus tard.\\
 	On remarque notamment que en sommant les quatre équations vues plus haut, on obtient $0$, ce qui semble logique car la population au sens large(incluant les morts) ne varie pas.
+
+\subsection{Propriétés}
+	On réintroduit ici les paramètres de la maladie que nous avons défini plus haut, à savoir $R_0$ le taux de reproduction de la maladie, $\tau$ le temps moyen d'infection et $x_0$ la population initiale saine.
 
 \section{Appendice}
 	\subsection{Code}
