@@ -10,11 +10,11 @@ proba_mort = 0.001
 proba_soin = 0.2
 rayon_infection = 1 
 
-def init_im(taille):
+def old_init_im(taille):
     im = Image.new("RGB", (taille, taille), "white")
     return im
 
-def init_grid(size):
+def old_init_grid(size):
     G = []
     for i in range(size):
         sG = []
@@ -25,7 +25,7 @@ def init_grid(size):
     return G
 
 
-def cases_touchees(x, y, rayon, minx, maxx, miny, maxy):
+def old_cases_touchees(x, y, rayon, minx, maxx, miny, maxy):
     coords = []
 
     for i in range(max(minx, x - rayon), min(maxx, x + rayon + 1)):
@@ -37,9 +37,9 @@ def cases_touchees(x, y, rayon, minx, maxx, miny, maxy):
     return coords
 
 
-def contact(grille, i, j):
+def old_cases_contact(grille, i, j):
     compteur = 0
-    for i in cases_touchees(i, j, rayon_infection, 0, len(grille), 0, len(grille[0])):
+    for i in old_cases_touchees(i, j, rayon_infection, 0, len(grille), 0, len(grille[0])):
         if grille[i[0]][i[1]] == 1:
             compteur += 1
 
@@ -50,17 +50,17 @@ def contact(grille, i, j):
 # contacts avec des infectés et une probabilité dépendante de la maladie, ainsi que
 # de la densité de population
 
-def calcul_proba_infection(contacts, rayon, base_proba, i, j):
+def old_calcul_proba_infection(contacts, rayon, base_proba, i, j):
     return contacts * base_proba
 
 
-def binomial(p):
+def old_binomial(p):
     if random.random() <= p:
         return 1
     return 0
 
 
-def mort_ou_soigne(p1, p2):
+def old_mort_ou_soigne(p1, p2):
     if random.random() <= p1:
         return 2
     if random.random() <= p2:
@@ -68,22 +68,22 @@ def mort_ou_soigne(p1, p2):
     return 1
 
 
-def etat_suivant(grille, virus, rayon):
-    G = init_grid(len(grille))
+def old_etat_suivant(grille, virus, rayon):
+    G = old_init_grid(len(grille))
     for i in range(len(grille)):
         for j in range(len(grille[i])):
             if grille[i][j] == 0:
-                contacts = contact(grille, i, j)
-                G[i][j] = binomial(calcul_proba_infection(contacts, rayon, virus[0], i, j))
+                contacts = old_cases_contact(grille, i, j)
+                G[i][j] = old_binomial(old_calcul_proba_infection(contacts, rayon, virus[0], i, j))
             elif grille[i][j] == 1:
-                G[i][j] = mort_ou_soigne(virus[1], virus[2])
+                G[i][j] = old_mort_ou_soigne(virus[1], virus[2])
             else:
                 G[i][j] = grille[i][j]
 
     return G
 
 
-def compte(grille):
+def old_compte(grille):
     compteur = [0, 0, 0, 0]
     for i in grille:
         for j in i:
@@ -92,27 +92,27 @@ def compte(grille):
     return compteur
 
 
-def print_grille(grille):
+def old_print_grille(grille):
     for i in grille:
         print(i)
 
 
-def simulation(taille, virus, rayon):
-    grille = init_grid(taille)
+def old_simulation(taille, virus, rayon):
+    grille = old_init_grid(taille)
     etape = 0
-    while compte(grille)[1] != 0:
+    while old_compte(grille)[1] != 0:
         etape += 1
-        grille = etat_suivant(grille, virus, rayon)
+        grille = old_etat_suivant(grille, virus, rayon)
 
-    return etape, compte(grille)
+    return etape, old_compte(grille)
 
 
-def statistiques(taille, echantillon, virus, rayon):
+def old_statistiques_liste(taille, echantillon, virus, rayon):
     etapes = []
     comptes = []
 
     for i in range(echantillon):
-        etape, compte = simulation(taille, virus, rayon)
+        etape, compte = old_simulation(taille, virus, rayon)
         etapes.append(etape)
         comptes.append(compte)
 
@@ -120,15 +120,15 @@ def statistiques(taille, echantillon, virus, rayon):
     return sains, infectes, morts, soignes
 
 
-def courbe(taille, virus, rayon):
-    grille = init_grid(taille)
+def old_statistique_courbe(taille, virus, rayon):
+    grille = old_init_grid(taille)
     etape = 0
     suivi = [0]
     sains = [taille**2-1]
     infectes = [1]
     morts = [0]
     soignes = [0]
-    while compte(grille)[1] != 0:
+    while old_compte(grille)[1] != 0:
         etape += 1
         suivi.append(etape)
         sains.append(0)
@@ -145,7 +145,7 @@ def courbe(taille, virus, rayon):
                     morts[etape] += 1
                 else :
                     soignes[etape] += 1
-        grille = etat_suivant(grille, virus, rayon)
+        grille = old_etat_suivant(grille, virus, rayon)
 
     fig = plt.figure()
     fig.suptitle('Evolution de la population en fonction du nombre d\'étapes', fontsize=14)
@@ -167,7 +167,7 @@ def courbe(taille, virus, rayon):
 
     plt.show()
 
-def ancienne_transition(tab,im):
+def old_transition(tab,im):
     for i in range(len(tab)):
         for j in range(len(tab)):
             if tab[i][j]==0:
@@ -189,27 +189,27 @@ def ancienne_transition(tab,im):
     return im
     
     
-def ancienne_simulation_image(taille, virus, rayon):
-    im = init_im(taille)
-    grille = init_grid(taille)
+def old_simulation_image(taille, virus, rayon):
+    im = old_init_im(taille)
+    grille = old_init_grid(taille)
     etape = 0
     plt.imshow(im)
     plt.show
     gif=[]
     k=0
-    while compte(grille)[1] != 0:
+    while old_compte(grille)[1] != 0:
         k+=1
-        grille = etat_suivant(grille, virus, rayon)
-        im = ancienne_transition(grille,im)
+        grille = old_etat_suivant(grille, virus, rayon)
+        im = old_transition(grille,im)
         im.save(str(k)+'.png')
         gif.append(str(k)+'.png')
-    im = ancienne_transition(grille,im)
+    im = old_transition(grille,im)
     plt.imshow(im)
     plt.show()
     return gif
     
 
-def ancien_create_gif(filenames, duration,name):
+def old_create_gif(filenames, duration,name):
     images = []
     for filename in filenames:
         images.append(imageio.imread(filename))
