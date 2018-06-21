@@ -15,11 +15,14 @@
 \usepackage{graphicx}
 
 \usepackage{stmaryrd}
+\usepackage{float}
+\usepackage{colonequals}
 
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 \newcommand{\hsp}{\hspace{20pt}}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand*{\logeq}{\ratio\Leftrightarrow}
 
 \title{Compte rendu}
 \author{Arthur Lacoin - Timothé Rios}
@@ -46,7 +49,9 @@
 \tableofcontents
 
 \newpage
-
+\paragraph{Abstract\\}
+	Within the theme of transport, we have looked at how an epidemic spreads. To be able to represent this phenomenon, we chose to use a cellular automaton. A cellular automaton is a matrix of cells whose states vary over time. Here, at every moment, each cell can be Healthy, Sick, Deceased or Healed, according to its state as well as that of its neighbours at the moment before. Thus, with the information of an initial state, it is possible to materialize the spread of an epidemic. Of course, in order to accurately represent reality, it is necessary to make this model more complex by taking into account many factors that play a role in how a disease spreads.\\[2cm]
+	
 \begin{center}
 \textsc{Introduction}~\\[1cm]
 \end{center}
@@ -121,7 +126,8 @@ Les résultats réels sont récapitulés dans le tableau suivant :
 \begin{tabular} {| p{2cm} | p{2cm}| p{2cm} | p{2cm} |}
 	\hline
 	Maladie & $p_{infection}$ & $p_{mort}$ & $p_{guerison}$ \\ \hline
-	Ebola & $0.0201$ & $0.0818$ & $0.00909$ \\
+	Ebola & $0.0187$ & $0.0818$ & $0.00909$ \\ \hline
+	Grippe & $0.406$ & $0.0002$ & $0.1998$ \\
 	\hline
 \end{tabular}
 
@@ -131,19 +137,19 @@ Voici quelques étapes d'une simulation de notre automate. Le foyer originel -la
 
 \begin{figure}[hbtp]
 \centering
-\includegraphics[scale=0.22]{Frame-36.png}
+\includegraphics[scale=0.22]{../images/Frame-36.png}
 \caption{Étape 36}
 \end{figure}
 
 \begin{figure}[hbtp]
 \centering
-\includegraphics[scale=0.22]{Frame-195.png}
+\includegraphics[scale=0.22]{../images/Frame-195.png}
 \caption{Étape 195}
 \end{figure}
 
 \begin{figure}[hbtp]
 \centering
-\includegraphics[scale=0.22]{Frame-412.png}
+\includegraphics[scale=0.22]{../images/Frame-412.png}
 \caption{Étape 412}
 \end{figure}
 
@@ -155,18 +161,18 @@ Dans la simulation présentée ci-dessous, les probabilités d'infection, de gu�
 
 
 
-\includegraphics[scale=1]{g.png} 
+\includegraphics[scale=1]{../images/g.png} 
 
 
 	Dans ce cas, $p_1$ valait 0.2, $p_2$ valait 0.25, $p_3$ valait 0.2 et la maladie pouvait se transmettre dans un rayon de deux cellules autour de l'infectée.
 
-\includegraphics[scale=1]{Figure_2.png}
+\includegraphics[scale=1]{../images/Figure_2.png}
 
 
 	Ici, nous pouvons voir l'exemple d'une maladie non létale, se rapprochant d'un rhume tout en étant bien plus infectieuse.
 
 
-\includegraphics[scale=1]{Figure_3.png}
+\includegraphics[scale=1]{../images/Figure_3.png}
 
 
 
@@ -187,35 +193,79 @@ Il apparaît ainsi qu'un grand nombre de paramètres a été négligé : il est 
 	\item nous avons pris en compte les mouvements de population, en fonction de deux paramètres : la probabilité qu'une partie de population quitte une case, et la probabilité qu'une case a d'attirer la population des cases adjacentes.
 	\end{itemize}
 	
-	Ces ajouts de paramètres permettent une simulation plus fine et plus proche de la réalité. Cela permet d'utiliser de bien meilleure façon les automates cellulaires, qui ont pour avantage de prendre en compte les paramètres géographiques de la simulation.
+	Ces ajouts de paramètres permettent une simulation plus fine et plus proche de la réalité. Cela permet d'utiliser de bien meilleure façon les automates cellulaires, qui ont pour avantage de prendre en compte les paramètres géographiques de la simulation. Cette simulation est aussi plus intéressante pour les simulations à grande échelle, étant donné que plus de population peut-être traitée sur une grille de la même taille.\\
+
+Pour les paramètres nous avons choisi les mêmes que ceux du premier automate, étant donné que les fonctionnements restent proches. 
 
 
 \subsection{Résultats}
 
 Les résultats graphiques de cet automate permettent d'afficher la densité de population des quatre états au sein de toutes les cellules de la grille. Bien sûr, il n'est maintenant plus possible d'afficher tous les paramètres de la grille sur une seule image. Voici par exemple la répartition des individus sains sur une grille \\[0.6cm]
 
-\includegraphics[scale=2]{../images/Frame-1.png} 
-\includegraphics[scale=2]{../images/Frame-58.png} 
-\includegraphics[scale=2]{../images/Frame-221.png}
+\begin{figure}[H]
+\caption{Étape 1}
+\centering
+\includegraphics[scale=2]{../images/Frame-1-maldes-contr.png}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Étape 61}
+\centering
+\includegraphics[scale=2]{../images/Frame-61-malades-contr.png}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Étape 109}
+\centering
+\includegraphics[scale=2]{../images/Frame-109_malades-contr.png}
+\end{figure}
 
 
-Ici, plus une cellule contient de personnes saines, plus le pixel la représentant sur l'image est blanc. Les cellules sont donc toutes légèrement grisées à la première étape, non pas parce qu'elles contiennent des individus malades, morts ou guéris, mais parce que le programme étalonne automatiquement les couleurs en fonction de la taille de la grille et de sa population afin de pouvoir intensifier la couleur si la population saine d'une cellule augmente.
+Ici, plus une cellule contient de personnes malades, plus le pixel la représentant sur l'image est rouge. Les cellules sont donc toutes légèrement rougies à la première étape, non pas parce qu'elles contiennent des individus malades, morts ou guéris, mais parce que le programme étalonne automatiquement les couleurs en fonction de la taille de la grille et de sa population afin de pouvoir intensifier la couleur si la population saine d'une cellule augmente.
 Bien sûr, cette simulation servant d'exemple pour présenter ce nouvel automate, ses cellules possèdent des probabilités de déplacement des populations bien plus élevées que dans la réalité.
-On remarque dans la dernière image que l'épidémie a complètement envahie le côté droit avant les coins de gauche. Cet état est bien dû à l'incertitude causée par les probabilités.
+On remarque dans la dernière image que l'épidémie a complètement envahi le côté droit avant les coins de gauche. Cet état est bien dû à l'incertitude causée par les probabilités.
+
  \subsection{Comparaison}
 Ce nouvel automate nous permet donc une modélisation plus précise de l'évolution d'une maladie. Ainsi, nous avons pu comparer nos résultats,comme celui ci-dessous, avec ceux de précédentes études.
 
-\includegraphics[scale=1]{../images/tttt.png}
+\begin{figure}[H]
+\caption{Ebola - 0 ville}
+\centering
+\includegraphics[scale=0.8]{../images/automate2_ebola_0villes.png}
+\end{figure}
 
-\includegraphics[scale=0.5]{../images/tttttttttt.png}   
+\begin{figure}[H]
+\caption{Ebola - 1 ville}
+\centering
+\includegraphics[scale=0.8]{../images/automarte2_ebola_1ville_proba2.png}
+\end{figure}
 
-\includegraphics[scale=0.5]{../images/automate_cellulaire_comp.png} 
+\begin{figure}[H]
+\caption{Carte - 1 ville}
+\centering
+\includegraphics[scale=0.8]{../images/carte_une_ville.png}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Ebola - 2 villes}
+\centering
+\includegraphics[scale=0.8]{../images/automate2_ebola_2villes_proba2.png}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Carte 2 villes}
+\centering
+\includegraphics[scale=0.8]{../images/carte_deux_villes.png}
+\end{figure}
+
+
+
 
 Ci-dessus sont présentés les résultats d'une autre étude avec un automate cellulaire, il apparaît clairement que leurs courbes sont similaires aux nôtres.
 
 \includegraphics[scale=0.5]{../images/differentiel_1.png} 
 
-De même, les résultats d'une autre étude utilisant la méthode différentielle concordent également à ceux que nous obtenons.
+De même, les résultats d'une autre étude utilisant la méthode différentielle concordent également à\pageref{9} ceux que nous obtenons.
 
 \section{Méthode différentielle}
 \subsection{Équations}
@@ -231,10 +281,32 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 	On remarque notamment que en sommant les quatre équations vues plus haut, on obtient $0$, ce qui semble logique car la population au sens large(incluant les morts) ne varie pas.
 
 \subsection{Propriétés}
-	On réintroduit ici les paramètres de la maladie que nous avons défini plus haut, à savoir $R_0$ le taux de reproduction de la maladie, $\tau$ le temps moyen d'infection et $x_0$ la population initiale saine. On pose aussi $\rho = \frac{\gamma}{\beta}$. On a alors $R_0 = \frac{x_0}{\rho}$ 
+	On réintroduit ici les paramètres de la maladie que nous avons défini plus haut, à savoir $R_0$ le taux de reproduction de la maladie, $\tau$ le temps moyen d'infection et $S_0$ la population initiale saine. On pose aussi $\rho = \frac{\gamma + \delta}{\beta}$. On a alors $R_0 = \frac{S_0}{\rho}$ \\
+	On peut alors mettre en évidence l'utilité de $R_0$ par ces calculs : \\
+	\begin{align*}	
+	\frac{dI(t)}{dt} &= \beta S(t)I(t) - \gamma I(t) - \delta I(t) \\
+					 &= I(t)(\beta S(t) - (\gamma + \delta) ) \\
+					 &= I(t)(\gamma + \delta)(\frac{\beta}{\gamma + \delta}S(t) - 1) \\ 
+					 &= I(t)(\gamma + \delta)(\frac{S(t)}{\rho} - 1) \\
+					 &= I(t)(\gamma + \delta)(R_0 \frac{S(t)}{S_0} - 1)	
+	\end{align*}
+	
+	En $0$, cela donne $\frac{dI(t)}{dt} = I(t)(\gamma + \delta)(R_0 - 1)$. Ce qui montre bien que si $R_0$ est inférieur à 1, le nombre d'infectés va diminuer, et la maladie s'éteindra vite.\\[0.2cm]
+	
+	On peut aussi chercher le maximum des courbes, en cherchant les points où les dérivées s'annulent. Ce n'est intéressant que pour les infectés, ce qui donne: 
+	\begin{align*}
+		\frac{dI(t)}{dt} = 0 &\Leftrightarrow \beta S(t)I(t) - \gamma I(t) - \delta I(t) = 0 \\
+		                     &\Leftrightarrow \beta S(t)I(t) = (\gamma + \delta) I(t) \\
+		                     &\Leftrightarrow S(t) = \frac{(\gamma + \delta)}{\beta} \\
+		                     &\Leftrightarrow S(t) = \rho
+	\end{align*}
 
-\section{Appendice}
-	\subsection{Code}
+\subsection{Résultats}
+
+
+
+%\section{Appendice}
+	%\subsection{Code}
 
 \lstset{
   literate=
@@ -253,9 +325,9 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 }
 \lstset{breaklines=true}
 
-\lstinputlisting[inputencoding=latin1, language=Python]{../tipe_en_cours.py}
+%\lstinputlisting[inputencoding=latin1, language=Python]{../tipe_en_cours.py}
 
-\lstinputlisting[inputencoding=latin1, language=Python]{../classes.py}
+%\lstinputlisting[inputencoding=latin1, language=Python]{../classes.py}
 
 
 
@@ -263,7 +335,7 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 
 \paragraph{Commentaire bibliographique\\}
 \noindent
-\cite{ref1} : Cet article nous a permis de bien comprendre la théorie des automates cellulaires, et de mettre l'accent sur les paramètres intéressants qu'une simulation par automate cellulaires permettait de prendre en compte. Il présente aussi les principaux avantages des automates cellulaires par rapport à la méthode différentielle.
+\cite{ref} : Cet article nous a permis de bien comprendre la théorie des automates cellulaires, et de mettre l'accent sur les paramètres intéressants qu'une simulation par automate cellulaires permettait de prendre en compte. Il présente aussi les principaux avantages des automates cellulaires par rapport à la méthode différentielle.
 
 \cite{ref2} : Cet article, en plus de présenter un autre modèle d'automates cellulaires, fourni une liste relativement exhaustive de paramètres à prendre en compte dans la simulation(même si les auteurs en ont négligé une partie qui ne présentait qu'un  intérêt minime.
 
@@ -272,6 +344,8 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 \cite{ref4} : Cet article présente la méthode différentielle, et est très fourni en graphiques bien expliqués.
 
 \cite{ref5} : Ce livre nous a fournit des éléments sur l'histoire de l'épidémiologie.
+
+\newpage
 
 \bibliographystyle{plain}
 
