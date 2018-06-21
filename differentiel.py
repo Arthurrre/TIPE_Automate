@@ -38,9 +38,12 @@ def simulation_differentielle(virus, pas):
     L=[]
     y =[99990,10,0,0]
     k=0
-    while y[1] > 10**-1:
+    while y[1] > 1:
+        k+=1
         L.append(copy.deepcopy(y))
         y = suivant(y, virus, pas)
+        if k == 25:
+            break
     return L
 
 def courbe_differentielle(virus, pas):
