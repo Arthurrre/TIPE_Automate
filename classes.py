@@ -47,9 +47,14 @@ class Cellule:
         # On calcule les morts avant les gueris
 
         self.repartition[2] += int(self.repartition[1] * virus[1])
+        if int(self.repartition[1]*virus[1])==0 and self.repartition[1] >= 1 :
+            self.repartition[2] += 1
+            self.repartition[1] -=1
         self.repartition[1] -= int(self.repartition[1] * virus[1])
-
         self.repartition[3] += int(self.repartition[1] * virus[2])
+        if int(self.repartition[1]*virus[2])==0 and self.repartition[1] >= 1 :
+            self.repartition[3] += 1
+            self.repartition[1] -=1
         self.repartition[1] -= int(self.repartition[1] * virus[2])
 
 
@@ -94,8 +99,8 @@ class Grille:
             sous_liste = []
             for j in range(taille):
                 if(geographie[i][j] == campagne):
-                    attractivite = 0.1
-                    proba_mvt = 0.1
+                    attractivite = 0.2
+                    proba_mvt = 0.2
                 elif(geographie[i][j] == ville):
                     attractivite = 0.5
                     proba_mvt = 0.3
@@ -141,7 +146,7 @@ class Grille:
 
                 # Choix de la case où la population part
                 # Ici le rayon vaut 1 car on considére que les populations ne peuvent, par exemple
-                # prendre l'avion.
+                # prendre l'avion.
                 voisins = cases_touchees(i, j, 1, 0, self.taille, 0, self.taille)
 
                 liste_probas = [self.cellules[x][y].coeff_attractivite for x, y in voisins]
