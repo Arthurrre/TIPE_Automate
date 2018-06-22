@@ -274,12 +274,14 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 	\begin{align}
 		&\frac{dS(t)}{dt} = - \beta I(t)S(t) \\
 		&\frac{dI(t)}{dt} = \beta S(t)I(t) - \gamma I(t) - \delta I(t) \\
-		&\frac{dM(t)}{dt} = \delta I(t) \\
-		&\frac{dG(t)}{dt} = \gamma I(t)
-	\end{align}
+		&\frac{dG(t)}{dt} = \gamma I(t)\\
+		&\frac{dM(t)}{dt} = \delta I(t)
+			\end{align}
 	
 	Ces équations différentielles, une fois résolues, donnent des courbes d'évolution des populations que nous présenterons plus tard.\\
 	Bien sûr, en sommant les quatre équations vues plus haut, on obtient $0$, conséquence de la constance de la population au sens large du terme (incluant les morts).
+	
+	$$\frac{d}{dt}(S+I+G+M)(t)=0$$
 
 \subsection{Propriétés}
 	Nous réintroduisons ici les paramètres de la maladie que nous avons défini plus haut, à savoir $R_0$ le taux de reproduction de la maladie, $\tau$ le temps moyen d'infection et $S_0$ la population initiale saine. Nous posons aussi $\rho = \frac{\gamma + \delta}{\beta}$. On a alors $R_0 = \frac{S_0}{\rho}$ \\

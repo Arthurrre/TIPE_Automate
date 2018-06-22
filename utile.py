@@ -5,3 +5,5 @@ def test(taille_grille):
     g.cellules[int(taille_grille/2)][int(taille_grille/2)].repartition[1] += 100
     return g
 virus = [0.4,0.1,0.1]
+
+g=test(10)

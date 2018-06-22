@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.19)  21 JUN 2018 16:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.19)  22 JUN 2018 14:39
 entering extended mode
 **./pas_fini.tex
 (pas_fini.tex
@@ -784,90 +784,71 @@ Underfull \hbox (badness 10000) in paragraph at lines 273--274
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--287
+Underfull \hbox (badness 10000) in paragraph at lines 287--289
 
  []
 
 [12 <../images/differentiel_1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 295--296
+Underfull \hbox (badness 10000) in paragraph at lines 297--298
 
  []
 
 <../images/diff_grippe.png, id=92, 462.528pt x 345.4506pt>
 File: ../images/diff_grippe.png Graphic file (type png)
 <use ../images/diff_grippe.png>
-Package pdftex.def Info: ../images/diff_grippe.png  used on input line 306.
+Package pdftex.def Info: ../images/diff_grippe.png  used on input line 308.
 (pdftex.def)             Requested size: 462.52686pt x 345.44975pt.
 <../images/diff_comp_article.png, id=93, 456.95718pt x 303.38344pt>
 File: ../images/diff_comp_article.png Graphic file (type png)
 <use ../images/diff_comp_article.png>
-Package pdftex.def Info: ../images/diff_comp_article.png  used on input line 30
-9.
+Package pdftex.def Info: ../images/diff_comp_article.png  used on input line 31
+1.
 (pdftex.def)             Requested size: 456.95605pt x 303.38269pt.
 
-Overfull \hbox (2.71304pt too wide) in paragraph at lines 306--310
+Overfull \hbox (2.71304pt too wide) in paragraph at lines 308--312
 [][] \T2A/cmr/m/n/10 Voici
  []
 
 [13 <../images/diff_grippe.png>] [14 <../images/diff_comp_article.png>]
-
-LaTeX Warning: Citation `ref' on page 15 undefined on input line 347.
-
-
-LaTeX Warning: Citation `ref2' on page 15 undefined on input line 349.
-
-
-LaTeX Warning: Citation `ref3' on page 15 undefined on input line 351.
-
-
-LaTeX Warning: Citation `ref4' on page 15 undefined on input line 353.
-
-
-LaTeX Warning: Citation `ref5' on page 15 undefined on input line 355.
-
-[15]
-No file pas_fini.bbl.
-(pas_fini.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[15] (pas_fini.bbl) [16] (pas_fini.aux) ) 
 Here is how much of TeX's memory you used:
- 6433 strings out of 492973
- 90929 string characters out of 3125822
- 168782 words of memory out of 3000000
- 10162 multiletter control sequences out of 15000+200000
- 19649 words of font info for 42 fonts, out of 3000000 for 9000
+ 6442 strings out of 492973
+ 91070 string characters out of 3125822
+ 168802 words of memory out of 3000000
+ 10168 multiletter control sequences out of 15000+200000
+ 20523 words of font info for 43 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,10n,32p,949b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi
-600\lacc1000.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
-\lh\lh-t2a\dpi600\larm0700.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\f
-onts\pk\ljfour\lh\lh-t2a\dpi600\labx1200.pk> <C:\Users\Utilisateur\AppData\Loca
-l\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\laxc1728.pk> <C:\Users\Utilisateu
-r\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\larm1000.pk> <C:\Us
-ers\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\labx1
-000.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2
-a\dpi600\labx1440.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\l
-jfour\lh\lh-t2a\dpi600\lacc1440.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\
-2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\lasx2074.pk> <C:\Users\Utilisateur\AppData
-\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\lacc1728.pk><C:/Users/Utilis
-ateur/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmmi10.pfb><C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmmi5.pfb><C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Utilisateur/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Utilisateur/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/
-Utilisateur/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.p
-fb><C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb><C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Utilisateur/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/Utilisateur/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/hoekwater/stmary10.pfb>
-Output written on pas_fini.pdf (16 pages, 630619 bytes).
+ <C:\Users\Utilisateur\AppData\Local\M
+iKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\lati1000.pk> <C:\Users\Utilisateur\A
+ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\lacc1000.pk> <C:\Users
+\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\larm0700
+.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\d
+pi600\labx1200.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
+ur\lh\lh-t2a\dpi600\laxc1728.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9
+\fonts\pk\ljfour\lh\lh-t2a\dpi600\larm1000.pk> <C:\Users\Utilisateur\AppData\Lo
+cal\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\labx1000.pk> <C:\Users\Utilisat
+eur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\labx1440.pk> <C:\
+Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\lac
+c1440.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-
+t2a\dpi600\lasx2074.pk> <C:\Users\Utilisateur\AppData\Local\MiKTeX\2.9\fonts\pk
+\ljfour\lh\lh-t2a\dpi600\lacc1728.pk><C:/Users/Utilisateur/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Utilisateur/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Ut
+ilisateur/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pf
+b><C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmmi7.pfb><C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmr10.pfb><C:/Users/Utilisateur/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Utilisateur/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Utilisateur/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/User
+s/Utilisateur/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy
+7.pfb><C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/symbols/msbm10.pfb><C:/Users/Utilisateur/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/hoekwater/stmary10.pfb>
+Output written on pas_fini.pdf (17 pages, 640657 bytes).
 PDF statistics:
- 408 PDF objects out of 1000 (max. 8388607)
+ 439 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

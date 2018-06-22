@@ -159,10 +159,10 @@ def old_statistique_courbe(taille, virus, rayon):
 
     etapes = np.array(range(len(sains)))
 
-    sains_courbe, = plt.plot(suivi, sains, label='Sains')
-    infectes_courbe, = plt.plot(suivi, infectes, label='Infectés')
-    morts_courbe, = plt.plot(suivi, morts, label='Morts')
-    soignes_courbe, = plt.plot(suivi, soignes, label='Soignés')
+    sains_courbe, = plt.plot(suivi, sains,"b", label='Sains')
+    infectes_courbe, = plt.plot(suivi, infectes,"r", label='Infectés')
+    morts_courbe, = plt.plot(suivi, morts,"k", label='Morts')
+    soignes_courbe, = plt.plot(suivi, soignes,"g", label='Soignés')
 
     plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
 
