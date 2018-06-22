@@ -9,6 +9,8 @@ malades_initiaux = 300
 x_malade_initial = taille_grille // 2
 y_malade_initial = taille_grille // 2
 
+taille_gif = 300
+
 ebola = [0.0187, 0.0818, 0.00909]
 grippe = [0.406, 0.0002, 0.1998]
 rayon_normal = 1
@@ -18,9 +20,9 @@ rayon_virus_colore = 2
 
 # Vieux gifs
 
-ancien_automate.old_create_gif(ancien_automate.old_simulation_image(taille_grille, ebola, rayon_normal), 0.01, "ebola1")
-ancien_automate.old_create_gif(ancien_automate.old_simulation_image(taille_grille, grippe, rayon_normal), 0.01, "grippe1")
-ancien_automate.old_create_gif(ancien_automate.old_simulation_image(taille_grille, virus_colore, rayon_virus_colore), 0.01, "colore")
+ancien_automate.old_create_gif(ancien_automate.old_simulation_image(taille_gif, ebola, rayon_normal), 0.01, "ebola1")
+ancien_automate.old_create_gif(ancien_automate.old_simulation_image(taille_gif, grippe, rayon_normal), 0.01, "grippe1")
+ancien_automate.old_create_gif(ancien_automate.old_simulation_image(taille_gif, virus_colore, rayon_virus_colore), 0.01, "colore")
 
 # Nombre moyen d'étapes
 
