@@ -3,8 +3,8 @@ from classes import *
 import ancien_automate
 import pickle
 
-taille_grille = 10
-population_initiale = 1000000000
+taille_grille = 50
+population_initiale = 1000000
 malades_initiaux = 300
 x_malade_initial = taille_grille // 2
 y_malade_initial = taille_grille // 2
@@ -63,10 +63,10 @@ g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiau
 create_gif("gueri", g, ebola, 0.01, "1_ville_gueri")
 
 g = Grille(taille_grille, GEO2, population_initiale)
-create_gif("mort", g, ebola, 0.01, "1_ville_mort")
 g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
+create_gif("mort", g, ebola, 0.01, "1_ville_mort")
 
-
+g = Grille(taille_grille, GEO2, population_initiale)
 g.cellules[x_malade_initial][y_malade_initial].repartition[1] += malades_initiaux
 
 sains, malades, morts, soignes = statistiques_final(g, ebola, 100)

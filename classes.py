@@ -65,8 +65,6 @@ def cases_touchees(x, y, rayon, minx, maxx, miny, maxy):
 
     for i in range(max(minx, x - rayon), min(maxx, x + rayon + 1)):
         for j in range(max(miny, y - rayon), min(maxy, y + rayon + 1)):
-            if j == y and i == x:
-                continue
             coords.append((i, j))
 
     return coords
@@ -102,7 +100,7 @@ class Grille:
                     attractivite = 0.2
                     proba_mvt = 0.2
                 elif(geographie[i][j] == ville):
-                    attractivite = 0.5
+                    attractivite = 0.3
                     proba_mvt = 0.3
                 elif(geographie[i][j] == route):
                     attractivite = 0.7
