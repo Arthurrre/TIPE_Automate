@@ -62,7 +62,7 @@ def statistiques_liste(grille, virus):
         if k > max_etape:
             break
     
-    return zip(*stats)
+    return zip(*stats)i
 
 
 def statistiques_courbe(grille, virus):
@@ -81,8 +81,8 @@ def statistiques_courbe(grille, virus):
 
     sains_courbe, = plt.plot(etapes, sains, 'b', label='Sains')
     infectes_courbe, = plt.plot(etapes, infectes, 'r', label='Infectés')
-    morts_courbe, = plt.plot(etapes, morts, 'k', label='Morts')
-    soignes_courbe, = plt.plot(etapes, soignes, 'g', label='Soignés')
+    morts_courbe, = plt.plot(etapes, morts, 'k', label='Retraités')
+    # soignes_courbe, = plt.plot(etapes, soignes, 'g', label='Soignés')
 
     plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
 
