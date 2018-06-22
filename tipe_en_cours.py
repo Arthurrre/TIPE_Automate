@@ -62,7 +62,7 @@ def statistiques_liste(grille, virus):
         if k > max_etape:
             break
     
-    return zip(*stats)i
+    return zip(*stats)
 
 
 def statistiques_courbe(grille, virus):

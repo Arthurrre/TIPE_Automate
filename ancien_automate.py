@@ -173,7 +173,7 @@ def old_transition(tab,im):
         for j in range(len(tab)):
             if tab[i][j]==0:
                 for k in range(i,(i+1)):
-                    for l in range(int(1000/len(tab)*j,int(1000/len(tab))*(j+1)):
+                    for l in range(int(1000/len(tab))*j,int(1000/len(tab))*(j+1)):
                         im.putpixel((k,l),(255,255,255))
             elif tab[i][j]==1:
                 for k in range(int(1000/len(tab))*i,int(1000/len(tab))*(i+1)):

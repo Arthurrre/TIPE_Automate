@@ -97,8 +97,8 @@ class Grille:
             sous_liste = []
             for j in range(taille):
                 if(geographie[i][j] == campagne):
-                    attractivite = 0.2
-                    proba_mvt = 0.2
+                    attractivite = 0.1
+                    proba_mvt = 0.1
                 elif(geographie[i][j] == ville):
                     attractivite = 0.3
                     proba_mvt = 0.3
