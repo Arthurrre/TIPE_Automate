@@ -1,10 +1,6 @@
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
-proba_infection = 0.05
-proba_mort = 0.001
-proba_soin = 0.2
-virus =[proba_infection, proba_mort, proba_soin]
 
 def deriver(y, virus):
     proba_infection = virus[0]
@@ -38,12 +34,9 @@ def simulation_differentielle(virus, pas):
     L=[]
     y =[99990,10,0,0]
     k=0
-    while y[1] > 1:
-        k+=1
+    while y[1] > 10**-1:
         L.append(copy.deepcopy(y))
         y = suivant(y, virus, pas)
-        if k == 25:
-            break
     return L
 
 def courbe_differentielle(virus, pas):
