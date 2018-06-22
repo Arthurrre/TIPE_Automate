@@ -101,8 +101,8 @@
 	\underline{Ou bien $\tau \ge 2$} et on \underline{suppose que $P(k)$ est vraie pour $k \in \llbracket 1, \tau - 1 \rrbracket$. Montrons que $P(k+1)$ est vraie.}\\[0.2cm]
 	$\forall i \in \llbracket 1, k \rrbracket, E(X_i) = n(1-p)^{i-1}p$ par $P(k)$. Il reste à calculer $E(X_{k+1})$.\\
 	\begin{align*}
-		E(X_{k+1}) &= p(n - \sum_{i = 1}^n E(X_i)) \\
-		           &= p(n - \sum_{i = 1}^n n(1-p)^{i - 1}p \\
+		E(X_{k+1}) &= p(n - \sum_{i = 1}^k E(X_i)) \\
+		           &= p(n - \sum_{i = 1}^k n(1-p)^{i - 1}p) \\
 		           &= np(1-p)^k
 	\end{align*}
 	On conclut par récurrence multiple finie.\\
@@ -305,8 +305,8 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 	\end{align*}
 
 \subsection{Résultats}
-\includegraphics[scale=1]{../images/diff_grippe.png}
-	Voici un résultat de la méthode différentielle pour les probabilités de la grippe, soit $p_{\text{infection}} = 0.406, p_{\text{mort}} = 0.OOO2$, et $p_{\text{guerison}} = 0.1998$. \\
+\includegraphics[scale=1]{../images/diff_grippe.png}\\
+	Voici un résultat de la méthode différentielle pour les probabilités de la grippe, soit $p_{\text{infection}} = 0.406, p_{\text{mort}} = 0.0002$, et $p_{\text{guerison}} = 0.1998$. \\
 	Après comparaison avec ce graphe effectué par une étude précédente,\\
 \includegraphics[scale=01]{../images/diff_comp_article.png}
 

@@ -32,7 +32,7 @@ def suivant(y_n, virus, pas):
     
 def simulation_differentielle(virus, pas):
     L=[]
-    y =[99990,10,0,0]
+    y =[999000,1000,0,0]
     k=0
     while y[1] > 10**-1:
         L.append(copy.deepcopy(y))
@@ -57,12 +57,11 @@ def courbe_differentielle(virus, pas):
     etapes = np.array(range(len(resultat)))
     a,b,c,d = zip(*resultat)
     
-    sains_courbe, = plt.plot(suivi, a, label='Sains')
-    infectes_courbe, = plt.plot(suivi, b, label='Infectés')
-    morts_courbe, = plt.plot(suivi, c, label='Morts')
-    soignes_courbe, = plt.plot(suivi, d, label='Soignés')
+    sains_courbe, = plt.plot(suivi, a,'b', label='Sains')
+    infectes_courbe, = plt.plot(suivi, b,'r', label='Infectés')
+    morts_courbe, = plt.plot(suivi, c,'k', label='Morts')
+    soignes_courbe, = plt.plot(suivi, d,'g', label='Soignés')
 
     plt.legend(handles=[sains_courbe, infectes_courbe, morts_courbe, soignes_courbe])
 
     plt.show()
-    print(resultat)
