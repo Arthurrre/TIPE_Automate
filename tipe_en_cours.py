@@ -19,7 +19,7 @@ proba_soin = 0.1
 rayon_infection = 2
 
 min_etape = 200
-max_etape = 400
+max_etape = 1000
 
 def compte(grille):
     compteur = [0, 0, 0, 0]
@@ -55,7 +55,7 @@ def statistiques_final(grille, virus, quantite):
 def statistiques_liste(grille, virus):
     k = 0
     stats = []
-    while k < min_etape or compte(grille)[1] >= 10 * grille.taille ** 2:
+    while compte(grille)[1] !=0:
         k += 1
         stats.append(grille.stats())
         grille.next(virus)
@@ -111,9 +111,12 @@ def transition_image_malades(grille, im, coeff):
             intensite = int(grille.cellules[i][j].repartition[1]*coeff)
             if intensite < 0:
                 intensite = 0
+            if intensite == 0:
+                im.putpixel((i, j), (255,255,255))
             if intensite > 255:
                 intensite = 255
-            im.putpixel((i, j), (intensite, 0, 0))
+            if intensite > 0:
+                im.putpixel((i, j), (255, 255-intensite, 255-intensite))
     return im
 
 def transition_image_morts(grille, im, coeff):
@@ -161,9 +164,10 @@ def simulation_image_malades(grille, virus):
     im = init_im(grille.taille)
     gif = []
     k = 0
-    moyenne = grille.population_initiale//grille.taille**2
+    moyenne = grille.population_initiale//(3*grille.taille)**2
     coeff = 127/moyenne 
-
+    print(coeff)
+    print(moyenne)
     while compte(grille)[1] != 0:
         k += 1
         if sum(compte(grille)) > 2 * grille.population_initiale:
@@ -174,7 +178,9 @@ def simulation_image_malades(grille, virus):
         gif.append( str(k)+'_malades'+'.png')
         grille.next(virus)
         if k > max_etape:
+            print(population(grille))
             break
+    print(population(grille),k)
     return gif
 
 def simulation_image_morts(grille, virus):

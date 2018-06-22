@@ -53,6 +53,8 @@
 	Within the theme of transport, we have looked at how an epidemic spreads. To be able to represent this phenomenon, we chose to use a cellular automaton. A cellular automaton is a matrix of cells whose states vary over time. Here, at every moment, each cell can be Healthy, Sick, Deceased or Healed, according to its state as well as that of its neighbours at the moment before. Thus, with the information of an initial state, it is possible to materialize the spread of an epidemic. Of course, in order to accurately represent reality, it is necessary to make this model more complex by taking into account many factors that play a role in how a disease spreads.\\[2cm]
 	
 \begin{center}
+\LARGE
+\bf
 \textsc{Introduction}~\\[1cm]
 \end{center}
 
@@ -166,7 +168,7 @@ Dans la simulation présentée ci-dessus, les probabilités d'infection, de gué
 \includegraphics[scale=1]{../images/Figure_2.png}
 
 
-	Ici, nous pouvons voir l'exemple d'une maladie non létale, se rapprochant d'un rhume tout en étant bien plus infectieuse. On avait $p_{\text{infection}} = 0.7, p_{\text{mort}} = 0$, et $p_{\text{guerison}} = 0.6$
+	Nous avons utilisé ici les probabilités du virus de la grippe cités plus haut. La courbe de la population décédée est bien sûr beaucoup moins haute qu'au cas précédent $p_{\text{infection}} = 0.406, p_{\text{mort}} = 0.OOO2$, et $p_{\text{guerison}} = 0.1998$
 
 
 \includegraphics[scale=1]{../images/Figure_3.png}
@@ -175,7 +177,7 @@ Ici on avait $p_{\text{infection}} = 0.2, p_{\text{mort}} = 0.7$, et $p_{\text{g
 
 
 
-Dans cet exemple, la maladie est trop létale pour pouvoir se propager longtemps : les infectés meurent sans avoir eu le temps de contaminer un de leurs voisins.
+Ce dernier exemple présente les résultats en utilisant les probabilités d'Ebola.
 \subsection{Limites}
 	Cette version de l'automate cellulaire fournit déjà des résultats intéressants. Cependant, le modèle reste trop simple pour pouvoir modéliser la réalité d'une épidémie. En effet, il est ici supposé que les individus de la population étudiée restent sur place tout en étant étroitement collés les uns aux autres.
 Il apparaît ainsi qu'un grand nombre de paramètres a été négligé : il est ici supposé que la population est uniformément répartie, alors qu'en réalité cette densité dépend d'un nombre important de facteurs, comme le type de terrain, les constructions humaines (villes par exemple) ou les conditions météorologiques. De plus, nous supposons aussi que l'épidémie se déroule en un temps assez court pour que les décès naturels et les naissances soient négligeables, tout comme nous négligeons les mesures que pourraient prendre certains gouvernements en cas de pandémies majeures.
@@ -202,21 +204,21 @@ Pour les paramètres nous avons choisi les mêmes que ceux du premier automate, 
 Les résultats graphiques de cet automate permettent d'afficher la densité de population des quatre états au sein de toutes les cellules de la grille. Bien sûr, il n'est maintenant plus possible d'afficher tous les paramètres de la grille sur une seule image. Voici par exemple la répartition des individus sains sur une grille \\[0.6cm]
 
 \begin{figure}[H]
-\caption{Étape 1}
+\caption{Étape 10}
 \centering
-\includegraphics[scale=2]{../images/Frame-1-maldes-contr.png}
+\includegraphics[scale=1]{../images/10_malades.png}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Étape 61}
+\caption{Étape 129}
 \centering
-\includegraphics[scale=2]{../images/Frame-61-malades-contr.png}
+\includegraphics[scale=1]{../images/129_malades.png}
 \end{figure}
 
 \begin{figure}[H]
-\caption{Étape 109}
+\caption{Étape 214}
 \centering
-\includegraphics[scale=2]{../images/Frame-109_malades-contr.png}
+\includegraphics[scale=1]{../images/214_malades.png}
 \end{figure}
 
 
@@ -225,8 +227,8 @@ Bien sûr, cette simulation servant d'exemple pour présenter ce nouvel automate
 On remarque dans la dernière image que l'épidémie a complètement envahi le côté droit avant les coins de gauche. Cet état est bien dû à l'incertitude causée par les probabilités.
 
  \subsection{Comparaison}
-Ce nouvel automate nous permet donc une modélisation plus précise de l'évolution d'une maladie. Ainsi, nous avons pu comparer nos résultats,comme celui ci-dessous, avec ceux de précédentes études.
-
+Ce nouvel automate nous permet donc une modélisation plus précise de l'évolution d'une maladie. Ainsi, nous avons pu comparer nos résultats avec ceux de précédentes études.
+Les résultats montrés ci-dessous utilisent la nouvelle fonctionnalité de la géographie : les cartes affichent ainsi en rouge l'emplacement des cellules de type Ville, influant ainsi sur les résultats de la simulation.
 \begin{figure}[H]
 \caption{Ebola - 0 ville}
 \centering
@@ -264,11 +266,11 @@ Ci-dessus sont présentés les résultats d'une autre étude avec un automate ce
 
 \includegraphics[scale=0.5]{../images/differentiel_1.png} 
 
-De même, les résultats d'une autre étude utilisant la méthode différentielle concordent également à\pageref{9} ceux que nous obtenons.
+De même, les résultats d'une autre étude utilisant la méthode différentielle concordent également à ceux que nous obtenons.
 
 \section{Méthode différentielle}
 \subsection{Équations}
-	On peut aussi simuler les épidémies par la méthode différentielle. Nous nous sommes basés sur le modèle SIR, c'est à dire le modèle sains, infectés, rétablis. Les équations sont les suivantes :\\
+	On peut aussi simuler les épidémies par la méthode différentielle. Nous nous sommes basés sur le modèle SIR, c'est-à-dire le modèle sains, infectés, rétablis. Les équations sont les suivantes :\\
 	\begin{align}
 		&\frac{dS(t)}{dt} = - \beta I(t)S(t) \\
 		&\frac{dI(t)}{dt} = \beta S(t)I(t) - \gamma I(t) - \delta I(t) \\
@@ -277,11 +279,11 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 	\end{align}
 	
 	Ces équations différentielles, une fois résolues, donnent des courbes d'évolution des populations que nous présenterons plus tard.\\
-	On remarque notamment que en sommant les quatre équations vues plus haut, on obtient $0$, ce qui semble logique car la population au sens large(incluant les morts) ne varie pas.
+	Bien sûr, en sommant les quatre équations vues plus haut, on obtient $0$, conséquence de la constance de la population au sens large du terme (incluant les morts).
 
 \subsection{Propriétés}
-	On réintroduit ici les paramètres de la maladie que nous avons défini plus haut, à savoir $R_0$ le taux de reproduction de la maladie, $\tau$ le temps moyen d'infection et $S_0$ la population initiale saine. On pose aussi $\rho = \frac{\gamma + \delta}{\beta}$. On a alors $R_0 = \frac{S_0}{\rho}$ \\
-	On peut alors mettre en évidence l'utilité de $R_0$ par ces calculs : \\
+	Nous réintroduisons ici les paramètres de la maladie que nous avons défini plus haut, à savoir $R_0$ le taux de reproduction de la maladie, $\tau$ le temps moyen d'infection et $S_0$ la population initiale saine. Nous posons aussi $\rho = \frac{\gamma + \delta}{\beta}$. On a alors $R_0 = \frac{S_0}{\rho}$ \\
+	L'utilité de $R_0$ est alors mise en évidence : \\
 	\begin{align*}	
 	\frac{dI(t)}{dt} &= \beta S(t)I(t) - \gamma I(t) - \delta I(t) \\
 					 &= I(t)(\beta S(t) - (\gamma + \delta) ) \\
@@ -290,9 +292,9 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 					 &= I(t)(\gamma + \delta)(R_0 \frac{S(t)}{S_0} - 1)	
 	\end{align*}
 	
-	En $0$, cela donne $\frac{dI(t)}{dt} = I(t)(\gamma + \delta)(R_0 - 1)$. Ce qui montre bien que si $R_0$ est inférieur à 1, le nombre d'infectés va diminuer, et la maladie s'éteindra vite.\\[0.2cm]
+	Ainsi, en $0$, $\frac{dI(t)}{dt} = I(t)(\gamma + \delta)(R_0 - 1)$, ce qui montre bien que si $R_0$ est inférieur à 1, le nombre d'infectés va diminuer dés le début et la maladie s'éteindra alors très vite.\\[0.2cm]
 	
-	On peut aussi chercher le maximum des courbes, en cherchant les points où les dérivées s'annulent. Ce n'est intéressant que pour les infectés, ce qui donne: 
+	Il est aussi possible de chercher le maximum des courbes, en cherchant les points où les dérivées s'annulent, ce qui n'est vraiment utile que pour les infectés : 
 	\begin{align*}
 		\frac{dI(t)}{dt} = 0 &\Leftrightarrow \beta S(t)I(t) - \gamma I(t) - \delta I(t) = 0 \\
 		                     &\Leftrightarrow \beta S(t)I(t) = (\gamma + \delta) I(t) \\
@@ -301,7 +303,15 @@ De même, les résultats d'une autre étude utilisant la méthode différentiell
 	\end{align*}
 
 \subsection{Résultats}
+\includegraphics[scale=1]{../images/diff_grippe.png}
+	Voici un résultat de la méthode différentielle pour les probabilités de la grippe, soit $p_{\text{infection}} = 0.406, p_{\text{mort}} = 0.OOO2$, et $p_{\text{guerison}} = 0.1998$. \\
+	Après comparaison avec ce graphe effectué par une étude précédente,\\
+\includegraphics[scale=01]{../images/diff_comp_article.png}
 
+nous avons observé une différence moyenne de:\\
+	-cinq pour cent pour la courbes des Sains\\
+	-un pour cent pour la courbe des Infectés\\
+	-dix pour cent pour la courbe des Morts/Guéris (somme)
 
 
 %\section{Appendice}
