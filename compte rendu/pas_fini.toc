@@ -1,19 +1,9 @@
 \babel@toc {french}{}
-\contentsline {paragraph}{Abstract\\}{2}
-\contentsline {section}{\numberline {1}Premi\IeC {\`e}re version}{2}
-\contentsline {subsection}{\numberline {1.1}Pr\IeC {\'e}sentation}{2}
-\contentsline {paragraph}{D\IeC {\'e}finition formelle\\[0.2cm]}{2}
-\contentsline {paragraph}{Historique\\[0.2cm]}{2}
-\contentsline {paragraph}{Notre automate cellulaire\\[0.2cm]}{2}
-\contentsline {paragraph}{Calcul des probabilit\IeC {\'e}s\\[0.2cm]}{3}
-\contentsline {subsection}{\numberline {1.2}R\IeC {\'e}sultats}{4}
-\contentsline {subsection}{\numberline {1.3}Limites}{7}
-\contentsline {section}{\numberline {2}Deuxi\IeC {\`e}me version}{7}
-\contentsline {subsection}{\numberline {2.1}Pr\IeC {\'e}sentation}{7}
-\contentsline {subsection}{\numberline {2.2}R\IeC {\'e}sultats}{8}
-\contentsline {subsection}{\numberline {2.3}Comparaison}{9}
-\contentsline {section}{\numberline {3}M\IeC {\'e}thode diff\IeC {\'e}rentielle}{12}
-\contentsline {subsection}{\numberline {3.1}\IeC {\'E}quations}{12}
-\contentsline {subsection}{\numberline {3.2}Propri\IeC {\'e}t\IeC {\'e}s}{12}
-\contentsline {subsection}{\numberline {3.3}R\IeC {\'e}sultats}{13}
-\contentsline {paragraph}{Commentaire bibliographique\\}{15}
+\contentsline {paragraph}{Abstract\\}{2}%
+\contentsline {section}{\numberline {1}Première version}{2}%
+\contentsline {subsection}{\numberline {1.1}Présentation}{2}%
+\contentsline {paragraph}{Définition formelle\\[0.2cm]}{2}%
+\contentsline {paragraph}{Historique\\[0.2cm]}{2}%
+\contentsline {paragraph}{Notre automate cellulaire\\[0.2cm]}{2}%
+\contentsline {paragraph}{Calcul des probabilités\\[0.2cm]}{3}%
+\contentsline {subsection}{\numberline {1.2}Résultats}{4}%
